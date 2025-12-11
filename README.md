@@ -6,7 +6,7 @@ A React-based analytics dashboard for displaying survey results.
 
 - **Overview** - Executive summary (Coming Soon)
 - **About You** (Q1-3) - Demographics, discovery channels, political leanings ✓
-- **Your Values & Views** (Q4-9) - Coming Soon
+- **Your Values & Views** (Q4-9) - Causes & priorities (Q4 complete, Q5-9 coming soon)
 - **Your Support** (Q10-13) - Coming Soon
 - **Your Satisfaction** (Q14-18) - Coming Soon
 
@@ -32,28 +32,20 @@ The app will run at `http://localhost:3000`
 
 ### Option 2: Manual Deploy
 
-1. Run `npm run build` locally
-2. Drag and drop the `build` folder to Netlify
-
-## Tech Stack
-
-- React 18
-- React Router 6
-- Recharts (for visualisations)
-- Hosted on Netlify
+1. Run `npm install && npm run build`
+2. Drag the `build` folder to [app.netlify.com/drop](https://app.netlify.com/drop)
 
 ## Project Structure
 
 ```
 aa-survey-dashboard/
-├── public/
-│   └── index.html
 ├── src/
 │   ├── sections/
-│   │   └── AboutYouSection.jsx
+│   │   ├── AboutYouSection.jsx    (Q1-3) ✓
+│   │   └── ValuesViewsSection.jsx (Q4-9) - Q4 complete
 │   ├── App.js
 │   └── index.js
+├── public/index.html
 ├── netlify.toml
-├── package.json
-└── README.md
+└── package.json
 ```

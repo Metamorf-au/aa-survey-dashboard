@@ -36,7 +36,7 @@ const ageData = [
 const discoveryData = [
   { label: "Don't remember", count: 1690, pct: 33.0 },
   { label: 'TV/News/Media', count: 1599, pct: 31.2 },
-  { label: 'Social media', count: 989, pct: 19.3, hasBreakdown: true },
+  { label: 'Social media', count: 989, pct: 19.3 },
   { label: 'Friend or family', count: 509, pct: 9.9 },
   { label: 'AA Website', count: 388, pct: 7.6 },
   { label: 'Email from AA', count: 353, pct: 6.9 },
@@ -48,6 +48,14 @@ const discoveryData = [
   { label: 'VegKit', count: 131, pct: 2.6 },
 ];
 
+const socialMediaBreakdown = [
+  { label: 'Unspecified', count: 662 },
+  { label: 'Facebook', count: 211 },
+  { label: 'Instagram', count: 82 },
+  { label: 'YouTube', count: 58 },
+  { label: 'TikTok', count: 6 },
+];
+
 const otherDiscoveryData = [
   { label: 'Other Animal Organisations', count: 25 },
   { label: 'Event/Stall/Stand', count: 21 },
@@ -56,14 +64,6 @@ const otherDiscoveryData = [
   { label: 'Rally/Protest', count: 7 },
   { label: 'Print Materials', count: 7 },
   { label: 'Other minor channels', count: 7 },
-];
-
-const socialMediaBreakdown = [
-  { label: 'Unspecified', count: 662, pct: 66.9 },
-  { label: 'Facebook', count: 211, pct: 21.3 },
-  { label: 'Instagram', count: 82, pct: 8.3 },
-  { label: 'YouTube', count: 58, pct: 5.9 },
-  { label: 'TikTok', count: 6, pct: 0.6 },
 ];
 
 // Q3 Data - Political Leanings
@@ -84,37 +84,16 @@ const otherPartiesData = [
   { label: 'One Nation', count: 34 },
   { label: 'Libertarian/Conservative', count: 20 },
   { label: 'Non-voter', count: 10 },
-  { label: 'Sustainable Australia', count: 6 },
+  { label: 'Sustainable Australia Party', count: 6 },
   { label: 'Other minor parties', count: 17 },
 ];
 
-// Custom tooltip
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div style={{
-        background: 'white',
-        padding: '12px 16px',
-        borderRadius: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-        border: 'none',
-      }}>
-        <p style={{ margin: 0, fontWeight: 600, color: COLORS.text }}>{payload[0].payload.label}</p>
-        <p style={{ margin: '4px 0 0', color: COLORS.textMuted }}>
-          {payload[0].value.toLocaleString()} respondents ({payload[0].payload.pct}%)
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
-
 // Stat Card Component
-const StatCard = ({ label, value, subtext, accent = false }) => (
+const StatCard = ({ value, label, subtext, accent = false }) => (
   <div style={{
-    background: accent ? COLORS.primary : COLORS.cardBg,
+    background: accent ? COLORS.accent : COLORS.cardBg,
     borderRadius: '12px',
-    padding: '20px 24px',
+    padding: '20px',
     boxShadow: accent ? 'none' : '0 1px 3px rgba(0,0,0,0.08)',
     border: accent ? 'none' : `1px solid ${COLORS.quinary}`,
   }}>
@@ -247,7 +226,7 @@ export default function AboutYouSection() {
         <h1 style={{
           fontSize: '28px',
           fontWeight: 700,
-          color: COLORS.text,
+          color: COLORS.primary,
           margin: 0,
         }}>
           About You
@@ -284,51 +263,25 @@ export default function AboutYouSection() {
             respondents={5119}
           />
           
-          {/* Response Rate Stats */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '12px',
-            marginBottom: '24px',
+          <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+            <StatCard value="80.9%" label="Valid DOB" subtext="4,140 respondents" />
+            <StatCard value="4.9%" label="Invalid DOB" subtext="250 respondents" />
+            <StatCard value="14.2%" label="Not provided" subtext="729 respondents" accent />
+          </div>
+          
+          <HorizontalBarChart data={ageData} maxValue={2500} />
+          
+          <p style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            margin: '16px 0 0',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: `3px solid ${COLORS.accent}`,
           }}>
-            <StatCard label="Valid DOB" value="80.9%" subtext="4,140 respondents" accent />
-            <StatCard label="Invalid DOB" value="4.9%" subtext="250 respondents" />
-            <StatCard label="Not provided" value="14.2%" subtext="729 respondents" />
-          </div>
-
-          {/* Age Distribution */}
-          <div style={{ marginTop: '16px' }}>
-            <h4 style={{
-              fontSize: '14px',
-              fontWeight: 600,
-              color: COLORS.text,
-              margin: '0 0 16px',
-            }}>
-              Age Distribution
-            </h4>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={ageData} layout="vertical" margin={{ left: 60, right: 40 }}>
-                <XAxis type="number" hide />
-                <YAxis type="category" dataKey="label" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: COLORS.text }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="count" radius={[0, 4, 4, 0]}>
-                  {ageData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={CHART_COLORS[index]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-            <p style={{
-              fontSize: '13px',
-              color: COLORS.textMuted,
-              margin: '12px 0 0',
-              padding: '12px',
-              background: COLORS.background,
-              borderRadius: '8px',
-            }}>
-              <strong style={{ color: COLORS.primary }}>Key insight:</strong> 74.4% of respondents are aged 56 or older, indicating a mature supporter base.
-            </p>
-          </div>
+            <strong style={{ color: COLORS.primary }}>Key insight:</strong> 74.4% of respondents are aged 56+, indicating an older supporter base that may prefer traditional communication channels.
+          </p>
         </div>
 
         {/* Q2 - Discovery Channels */}
@@ -345,170 +298,126 @@ export default function AboutYouSection() {
             respondents={5119}
           />
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '32px',
-          }}>
-            {/* Left: Bar Chart */}
-            <div>
-              <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={discoveryData} layout="vertical" margin={{ left: 100, right: 40 }}>
-                  <XAxis type="number" hide />
-                  <YAxis 
-                    type="category" 
-                    dataKey="label" 
-                    axisLine={false} 
-                    tickLine={false} 
-                    tick={{ fontSize: 13, fill: COLORS.text }}
-                    width={100}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Bar dataKey="count" radius={[0, 4, 4, 0]}>
-                    {discoveryData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+          <HorizontalBarChart data={discoveryData} maxValue={1800} />
+          
+          {/* Social Media Breakdown */}
+          <div style={{ marginTop: '16px' }}>
+            <button
+              onClick={() => setShowSocialBreakdown(!showSocialBreakdown)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: `1px solid ${COLORS.tertiary}`,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showSocialBreakdown ? '▼' : '▶'} Social Media Breakdown (989 total)
+            </button>
             
-            {/* Right: Key Stats & Social Breakdown */}
-            <div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '12px',
-                marginBottom: '20px',
-              }}>
-                <StatCard label="Top Channel" value="33.0%" subtext="Don't remember" />
-                <StatCard label="TV/News/Media" value="31.2%" subtext="1,599 respondents" accent />
-              </div>
-              
-              {/* Social Media Breakdown */}
-              <div style={{
-                marginTop: '20px',
-              }}>
-                <button
-                  onClick={() => setShowSocialBreakdown(!showSocialBreakdown)}
-                  style={{
-                    marginTop: '0',
-                    padding: '8px 16px',
-                    background: 'transparent',
-                    border: `1px solid ${COLORS.tertiary}`,
-                    borderRadius: '6px',
-                    fontSize: '13px',
-                    color: COLORS.secondary,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  {showSocialBreakdown ? '▼' : '▶'} Social Media Breakdown (989 total)
-                </button>
-                
-                {showSocialBreakdown && (
-                  <div style={{
-                    marginTop: '12px',
-                    padding: '16px',
-                    background: COLORS.background,
-                    borderRadius: '8px',
-                  }}>
-                    <ResponsiveContainer width="100%" height={160}>
-                      <PieChart>
-                        <Pie
-                          data={socialMediaBreakdown}
-                          dataKey="count"
-                          nameKey="label"
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={40}
-                          outerRadius={70}
-                        >
-                          {socialMediaBreakdown.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={CHART_COLORS[index]} />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend 
-                          verticalAlign="middle" 
-                          align="right"
-                          layout="vertical"
-                          wrapperStyle={{ fontSize: '12px' }}
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                )}
-              </div>
-              
-              {/* Other Discovery Breakdown */}
+            {showSocialBreakdown && (
               <div style={{
                 marginTop: '12px',
-              }}>
-                <button
-                  onClick={() => setShowOtherDiscovery(!showOtherDiscovery)}
-                  style={{
-                    padding: '8px 16px',
-                    background: 'transparent',
-                    border: `1px solid ${COLORS.tertiary}`,
-                    borderRadius: '6px',
-                    fontSize: '13px',
-                    color: COLORS.secondary,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  {showOtherDiscovery ? '▼' : '▶'} "Other" Breakdown (195 total)
-                </button>
-                
-                {showOtherDiscovery && (
-                  <div style={{
-                    marginTop: '12px',
-                    padding: '16px',
-                    background: COLORS.background,
-                    borderRadius: '8px',
-                  }}>
-                    {otherDiscoveryData.map((item, index) => (
-                      <div key={item.label} style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        padding: '6px 0',
-                        borderBottom: index < otherDiscoveryData.length - 1 ? `1px solid ${COLORS.quinary}` : 'none',
-                      }}>
-                        <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
-                        <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
-                      </div>
-                    ))}
-                    <p style={{
-                      fontSize: '13px',
-                      color: COLORS.textMuted,
-                      margin: '12px 0 0',
-                      padding: '12px',
-                      background: COLORS.cardBg,
-                      borderRadius: '8px',
-                    }}>
-                      <strong style={{ color: COLORS.primary }}>Insight:</strong> Cross-pollination from other animal organisations (Animal Liberation, Animals Asia, RSPCA, AJP) was the leading source, followed by event stalls and market stands. Notably, 16 respondents specifically credited Lyn White or Peter Singer as their introduction to AA, demonstrating the power of personal brand, while 9 cited the live export campaigns as their gateway.
-                    </p>
-                  </div>
-                )}
-              </div>
-              
-              <p style={{
-                fontSize: '13px',
-                color: COLORS.textMuted,
-                margin: '16px 0 0',
-                padding: '12px',
+                padding: '16px',
                 background: COLORS.background,
                 borderRadius: '8px',
               }}>
-                <strong style={{ color: COLORS.primary }}>Key insight:</strong> Traditional media (TV/News) remains the top identifiable channel at 31.2%, aligning with the older demographic. Social media accounts for 19.3% with Facebook dominating.
-              </p>
-            </div>
+                <ResponsiveContainer width="100%" height={160}>
+                  <PieChart>
+                    <Pie
+                      data={socialMediaBreakdown}
+                      dataKey="count"
+                      nameKey="label"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                    >
+                      {socialMediaBreakdown.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={CHART_COLORS[index]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend 
+                      verticalAlign="middle" 
+                      align="right"
+                      layout="vertical"
+                      wrapperStyle={{ fontSize: '12px' }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
           </div>
+
+          {/* Other Discovery Breakdown */}
+          <div style={{ marginTop: '12px' }}>
+            <button
+              onClick={() => setShowOtherDiscovery(!showOtherDiscovery)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: `1px solid ${COLORS.tertiary}`,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showOtherDiscovery ? '▼' : '▶'} "Other" Breakdown (195 total)
+            </button>
+            
+            {showOtherDiscovery && (
+              <div style={{
+                marginTop: '12px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+              }}>
+                {otherDiscoveryData.map((item, index) => (
+                  <div key={item.label} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: index < otherDiscoveryData.length - 1 ? `1px solid ${COLORS.quinary}` : 'none',
+                  }}>
+                    <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+                    <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  margin: '12px 0 0',
+                  padding: '12px',
+                  background: COLORS.cardBg,
+                  borderRadius: '8px',
+                }}>
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> Cross-pollination from other animal organisations (Animal Liberation, Animals Asia, RSPCA, AJP) was the leading source, followed by event stalls and market stands. Notably, 16 respondents specifically credited Lyn White or Peter Singer as their introduction to AA, demonstrating the power of personal brand, while 9 cited the live export campaigns as their gateway.
+                </p>
+              </div>
+            )}
+          </div>
+          
+          <p style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            margin: '16px 0 0',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: `3px solid ${COLORS.accent}`,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insight:</strong> Traditional media (TV/News) remains the top identifiable channel at 31.2%, aligning with the older demographic. Social media accounts for 19.3% with Facebook dominating.
+          </p>
         </div>
 
         {/* Q3 - Political Leanings */}
@@ -525,7 +434,7 @@ export default function AboutYouSection() {
             respondents={5119}
           />
           
-          <HorizontalBarChart data={politicalData} maxValue={1788} />
+          <HorizontalBarChart data={politicalData} maxValue={1900} />
           
           {/* Other Parties Toggle */}
           <button
@@ -575,6 +484,7 @@ export default function AboutYouSection() {
             padding: '12px',
             background: COLORS.background,
             borderRadius: '8px',
+            borderLeft: `3px solid ${COLORS.accent}`,
           }}>
             <strong style={{ color: COLORS.primary }}>Key insight:</strong> 74.7% lean left (AJP + Greens + Labor), with Animal Justice Party being the dominant affiliation.
           </p>
