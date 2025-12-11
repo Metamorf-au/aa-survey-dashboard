@@ -160,13 +160,16 @@ const StatCard = ({ value, label, colorType = 'primary' }) => {
 const ValuesViewsSection = () => {
   return (
     <div style={{
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
       background: COLORS.background,
       minHeight: '100vh',
       padding: '32px',
     }}>
       {/* Section Header */}
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto 32px',
+      }}>
         <h2 style={{
           margin: '0 0 8px 0',
           fontSize: '28px',
@@ -179,6 +182,15 @@ const ValuesViewsSection = () => {
           Understanding what matters most to Animals Australia supporters
         </p>
       </div>
+
+      {/* Main Content Container */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+      }}>
 
       {/* Q4 - Causes for Donation */}
       <div style={{
@@ -235,20 +247,20 @@ const ValuesViewsSection = () => {
             The mid-tier causes (food system, dairy, legal actions) cluster tightly around 18%, indicating similar levels of interest.
           </p>
         </div>
-      </div>
 
-      {/* Placeholder for Q5-Q9 */}
-      <div style={{
-        background: COLORS.cardBg,
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-        border: `1px solid ${COLORS.quinary}`,
-        opacity: 0.5,
-      }}>
-        <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-          Q5-Q9 sections will be added here...
-        </p>
+        {/* Placeholder for Q5-Q9 */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: `1px solid ${COLORS.quinary}`,
+          opacity: 0.5,
+        }}>
+          <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
+            Q5-Q9 sections will be added here...
+          </p>
+        </div>
       </div>
     </div>
   );
