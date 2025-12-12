@@ -89,6 +89,17 @@ const q7Data = [
   { label: 'Hen lifespan (18 months)', fullLabel: 'Egg laying hens in all commercial systems are slaughtered at 18 months', count: 2428, pct: 47.4 },
 ];
 
+// Q8 Data - Dietary choices (sorted by count descending)
+const q8Data = [
+  { label: 'Reducing meat consumption', fullLabel: "I'm reducing my meat consumption", count: 1403, pct: 27.4 },
+  { label: 'Vegan', fullLabel: "I'm vegan", count: 1053, pct: 20.6 },
+  { label: 'Vegetarian', fullLabel: "I'm vegetarian", count: 1045, pct: 20.4 },
+  { label: 'Pescatarian', fullLabel: "I'm pescatarian", count: 699, pct: 13.7 },
+  { label: 'Swapping for alternatives', fullLabel: "I'm trying to swap more animal products for alternatives", count: 586, pct: 11.4 },
+  { label: 'Omnivore', fullLabel: "I'm an omnivore", count: 346, pct: 6.8 },
+  { label: 'Prefer not to say', fullLabel: "Prefer not to say", count: 38, pct: 0.7 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, respondents, subtitle }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -192,7 +203,6 @@ const StatCard = ({ value, label, colorType }) => {
     primary: '#2D5A47',
     secondary: '#1E7B8C',
     accent: '#E8724A',
-    warning: '#D4A017',
   };
   const bgColor = colorMap[colorType] || colorMap.primary;
   
@@ -483,7 +493,7 @@ const ValuesViewsSection = () => {
           }}>
             <StatCard value="90.7%" label="Pig farrowing crates" colorType="primary" />
             <StatCard value="86.4%" label="No humane slaughter" colorType="secondary" />
-            <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="warning" />
+            <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="accent" />
           </div>
 
           <HorizontalBarChart data={q7Data} maxValue={5000} height={460} />
@@ -517,6 +527,63 @@ const ValuesViewsSection = () => {
           </div>
         </div>
 
+        {/* Q8 - Dietary Choices */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q8"
+            title="Which one of the following best describes your current dietary choices?"
+            subtitle="Respondents asked to select one"
+            respondents={5060}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="27.4%" label="Reducing meat" colorType="primary" />
+            <StatCard value="20.6%" label="Vegan" colorType="secondary" />
+            <StatCard value="20.4%" label="Vegetarian" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q8Data} maxValue={1500} height={300} />
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Reducetarian majority: The largest group (27.4%) are actively reducing meat consumption - they're on a journey, not at a destination.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Strong vegan/vegetarian base: Combined 41% are fully vegan (20.6%) or vegetarian (20.4%) - a highly committed core supporter base.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Very few omnivores: Only 6.8% identify as omnivores - AA's supporter base is overwhelmingly plant-forward in their eating habits.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Transition spectrum: Grouping "reducing" + "swapping" + "pescatarian" as transitioning = 52.5% - over half are somewhere on the journey toward plant-based eating.
+            </p>
+          </div>
+        </div>
+
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -526,7 +593,7 @@ const ValuesViewsSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q8-Q9 sections will be added here...
+            Q9 section will be added here...
           </p>
         </div>
       </div>
