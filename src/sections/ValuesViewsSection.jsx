@@ -37,6 +37,17 @@ const q4Data = [
   { label: 'Fish farm cruelty', fullLabel: 'Exposing and ending cruelty on industrial fish farms, such as salmon farms', count: 242, pct: 4.7 },
 ];
 
+// Q5 Data - What inspires you to support AA (sorted by count descending)
+const q5Data = [
+  { label: 'Achieving results', fullLabel: 'They are committed to achieving results for animals', count: 3375, pct: 65.9 },
+  { label: 'Courage', fullLabel: 'They show courage, and bear witness where others will not go', count: 3363, pct: 65.7 },
+  { label: 'Inspire me', fullLabel: 'They inspire me with their vision, and give me hope a kinder world is possible', count: 2136, pct: 41.7 },
+  { label: 'Global impact', fullLabel: 'They have global impact, helping animals both here in Australia, and worldwide', count: 1542, pct: 30.1 },
+  { label: 'Step up', fullLabel: 'They are always the first to step up when animals need help', count: 1335, pct: 26.1 },
+  { label: 'Offer hope', fullLabel: 'They offer hope by transforming the food system and healing the animal-human relationship', count: 1243, pct: 24.3 },
+  { label: 'Innovative', fullLabel: 'They use innovative approaches, addressing the root causes of animal suffering', count: 1218, pct: 23.8 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, respondents, subtitle }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -230,6 +241,59 @@ const ValuesViewsSection = () => {
           </div>
         </div>
 
+        {/* Q5 - What Inspires You */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q5"
+            title="What inspires you to support Animals Australia?"
+            subtitle="Respondents could select up to 3 options"
+            respondents={5021}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="65.9%" label="Achieving results" colorType="primary" />
+            <StatCard value="65.7%" label="Courage" colorType="secondary" />
+            <StatCard value="41.7%" label="Inspire me" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q5Data} maxValue={3600} height={300} />
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Achieving results (65.9%) and Courage (65.7%) are virtually tied as the top inspirations - supporters value both tangible outcomes AND the willingness to confront difficult realities.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Inspire me (41.7%) ranks third, showing the emotional appeal of vision and hope for a kinder world resonates strongly with supporters.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              The bottom four options (Global impact, Step up, Offer hope, Innovative) cluster between 23-30%, suggesting these are secondary motivators rather than primary drivers.
+            </p>
+          </div>
+        </div>
+
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -239,7 +303,7 @@ const ValuesViewsSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q5-Q9 sections will be added here...
+            Q6-Q9 sections will be added here...
           </p>
         </div>
       </div>
