@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 // Color palette - nature/animal welfare inspired (consistent with About You section)
@@ -46,6 +46,32 @@ const q5Data = [
   { label: 'Step up', fullLabel: 'They are always the first to step up when animals need help', count: 1335, pct: 26.1 },
   { label: 'Offer hope', fullLabel: 'They offer hope by transforming the food system and healing the animal-human relationship', count: 1243, pct: 24.3 },
   { label: 'Innovative', fullLabel: 'They use innovative approaches, addressing the root causes of animal suffering', count: 1218, pct: 23.8 },
+];
+
+// Q6 Data - How AA inspired changes (sorted by count descending)
+const q6Data = [
+  { label: 'Expanded understanding', fullLabel: 'Expanded my understanding of the issues impacting animals', count: 3335, pct: 65.1 },
+  { label: 'Hopeful for animals', fullLabel: 'Made me feel more hopeful about the future for animals', count: 2779, pct: 54.3 },
+  { label: 'Individual actions matter', fullLabel: 'Given me hope that my individual actions can lead to meaningful change', count: 2720, pct: 53.1 },
+  { label: 'Dietary choices', fullLabel: 'Influenced my dietary choices (towards eating more or all animal-friendly foods)', count: 2615, pct: 51.1 },
+  { label: 'Do my bit', fullLabel: 'Inspired me to do my bit to make the world a kinder place', count: 2487, pct: 48.6 },
+  { label: 'Shopping habits', fullLabel: 'Influenced my shopping habits beyond eating more animal-friendly foods', count: 2343, pct: 45.8 },
+  { label: 'Inspire others', fullLabel: 'Helped me inspire friends or family to make choices that are kinder for animals', count: 1792, pct: 35.0 },
+  { label: 'Reflect on impact', fullLabel: 'Made me reflect on the kind of impact I want to have in the world', count: 1780, pct: 34.8 },
+  { label: 'Think differently', fullLabel: 'Inspired me to think differently about animals and how we treat them', count: 1377, pct: 26.9 },
+  { label: 'Other', fullLabel: 'Other', count: 330, pct: 6.4 },
+];
+
+// Q6 Other breakdown data
+const q6OtherData = [
+  { label: 'Already vegan/vegetarian before AA', count: 52 },
+  { label: 'All of the above / wanted more options', count: 36 },
+  { label: 'Trust/credibility/professionalism', count: 24 },
+  { label: 'Political/legal advocacy', count: 14 },
+  { label: 'Live export focus', count: 13 },
+  { label: 'Inspired personal advocacy', count: 12 },
+  { label: 'Reasonable/non-militant approach', count: 9 },
+  { label: 'Other minor responses', count: 170 },
 ];
 
 // Section Header Component
@@ -158,6 +184,8 @@ const StatCard = ({ value, label, colorType }) => {
 
 // Main Component
 const ValuesViewsSection = () => {
+  const [showQ6Other, setShowQ6Other] = useState(false);
+
   return (
     <div style={{
       fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
@@ -294,6 +322,115 @@ const ValuesViewsSection = () => {
           </div>
         </div>
 
+        {/* Q6 - How AA Inspired Changes */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q6"
+            title="How have the efforts of AA inspired you to make changes towards helping animals?"
+            subtitle="Respondents could select any that apply"
+            respondents={5050}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="65.1%" label="Expanded understanding" colorType="primary" />
+            <StatCard value="54.3%" label="Hopeful for animals" colorType="secondary" />
+            <StatCard value="51.1%" label="Dietary choices" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q6Data} maxValue={3500} height={420} />
+
+          {/* Other Breakdown Toggle */}
+          <div style={{ marginTop: '16px' }}>
+            <button
+              onClick={() => setShowQ6Other(!showQ6Other)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: '1px solid ' + COLORS.tertiary,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showQ6Other ? '▼' : '▶'} "Other" Breakdown (330 total)
+            </button>
+            
+            {showQ6Other && (
+              <div style={{
+                marginTop: '12px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+              }}>
+                {q6OtherData.map((item, index) => (
+                  <div key={item.label} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: index < q6OtherData.length - 1 ? '1px solid ' + COLORS.quinary : 'none',
+                  }}>
+                    <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+                    <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  margin: '12px 0 0',
+                  padding: '12px',
+                  background: COLORS.cardBg,
+                  borderRadius: '8px',
+                }}>
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> The largest "Other" group (52) were already vegan/vegetarian before discovering AA - they support AA because it aligns with existing values, not because AA changed them. Additionally, 36 respondents expressed frustration with the option limit, indicating high engagement across all choices.
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Expanded understanding (65.1%) tops the list - AA's primary impact is raising awareness and education about animal issues.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Hope is powerful: Two "hope" statements rank 2nd and 3rd (54.3% and 53.1%) - the emotional and motivational impact of AA's work resonates strongly.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Tangible behaviour change: Over half have changed dietary choices (51.1%) and nearly half have changed shopping habits (45.8%) - demonstrating real-world impact beyond awareness.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Social influence is harder: "Inspiring friends/family" ranks lower at 35% - personal change is more common than advocacy to others.
+            </p>
+          </div>
+        </div>
+
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -303,7 +440,7 @@ const ValuesViewsSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q6-Q9 sections will be added here...
+            Q7-Q9 sections will be added here...
           </p>
         </div>
       </div>
