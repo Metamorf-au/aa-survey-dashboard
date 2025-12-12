@@ -100,6 +100,50 @@ const q8Data = [
   { label: 'Prefer not to say', fullLabel: "Prefer not to say", count: 38, pct: 0.7 },
 ];
 
+// Q9 Data - Inspiration for dietary change (sorted by count descending, with corrected documentary count)
+const q9Data = [
+  { label: 'Factory farming cruelty awareness', fullLabel: 'Awareness of factory farming cruelty', count: 2304, pct: 45.0 },
+  { label: 'Emotional attachment to animals', fullLabel: 'My emotional attachment to animals', count: 2276, pct: 44.5 },
+  { label: 'Learning truth about farmed animals', fullLabel: 'Learning the truth about cruelty inflicted on farmed animals', count: 1515, pct: 29.6 },
+  { label: 'Slaughterhouse video', fullLabel: 'Viewing a video of slaughterhouse cruelty', count: 834, pct: 16.3 },
+  { label: 'Environmental concerns', fullLabel: 'Environmental concerns, such as deforestation', count: 640, pct: 12.5 },
+  { label: 'The work of Animals Australia', fullLabel: 'The work of Animals Australia', count: 603, pct: 11.8 },
+  { label: 'Health benefits', fullLabel: 'The health benefits', count: 384, pct: 7.5 },
+  { label: 'Documentary or book', fullLabel: 'Watching a documentary or reading a book', count: 279, pct: 5.5 },
+  { label: 'AA TV campaign', fullLabel: 'An Animals Australia TV campaign', count: 173, pct: 3.4 },
+  { label: 'Friends and family', fullLabel: 'Conversations with friends and family', count: 127, pct: 2.5 },
+  { label: 'VegKit website', fullLabel: "VegKit, Animals Australia's food advocacy website", count: 33, pct: 0.6 },
+  { label: 'Internet search', fullLabel: 'An Internet search, like google', count: 27, pct: 0.5 },
+];
+
+// Q9 Documentary/Book breakdown data
+const q9DocBookData = [
+  { label: 'Animal Liberation (Peter Singer)', count: 55 },
+  { label: 'Dominion', count: 32 },
+  { label: 'Earthlings', count: 27 },
+  { label: 'Four Corners / ABC exposé', count: 18 },
+  { label: 'Cowspiracy', count: 12 },
+  { label: 'Game Changers', count: 8 },
+  { label: 'Forks Over Knives', count: 5 },
+  { label: 'What the Health', count: 5 },
+  { label: 'Eating Animals (J. Safran Foer)', count: 5 },
+  { label: 'Other responses', count: 112 },
+];
+
+// Q9 Other Reasons breakdown data
+const q9OtherData = [
+  { label: 'Lifelong/childhood vegetarian or vegan', count: 27 },
+  { label: 'Witnessed slaughter/transport firsthand', count: 18 },
+  { label: 'Farm/sanctuary/animal work experience', count: 18 },
+  { label: 'Emotional/moral/ethical conviction', count: 14 },
+  { label: 'Media/AA campaigns/exposés', count: 12 },
+  { label: 'Health reasons', count: 9 },
+  { label: 'Dairy industry awareness (bobby calves)', count: 7 },
+  { label: 'Spiritual/religious reasons', count: 6 },
+  { label: 'Influenced by family/friends/partner', count: 5 },
+  { label: 'Other minor responses', count: 60 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, respondents, subtitle }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -224,6 +268,8 @@ const StatCard = ({ value, label, colorType }) => {
 // Main Component
 const ValuesViewsSection = () => {
   const [showQ6Other, setShowQ6Other] = useState(false);
+  const [showQ9DocBook, setShowQ9DocBook] = useState(false);
+  const [showQ9Other, setShowQ9Other] = useState(false);
 
   return (
     <div style={{
@@ -584,17 +630,165 @@ const ValuesViewsSection = () => {
           </div>
         </div>
 
+        {/* Q9 - Inspiration for Dietary Change */}
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           border: '1px solid ' + COLORS.quinary,
-          opacity: 0.5,
         }}>
-          <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q9 section will be added here...
-          </p>
+          <SectionHeader
+            question="Q9"
+            title="What most inspired you to become vegan, vegetarian or to reduce your meat consumption?"
+            subtitle="Respondents could select up to 2 options"
+            respondents={4696}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="45.0%" label="Factory farming cruelty" colorType="primary" />
+            <StatCard value="44.5%" label="Emotional attachment" colorType="secondary" />
+            <StatCard value="29.6%" label="Learning the truth" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q9Data} maxValue={2500} height={500} />
+
+          {/* Documentary/Book Breakdown Toggle */}
+          <div style={{ marginTop: '16px' }}>
+            <button
+              onClick={() => setShowQ9DocBook(!showQ9DocBook)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: '1px solid ' + COLORS.tertiary,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showQ9DocBook ? '▼' : '▶'} "Documentary or Book" Breakdown (279 responses)
+            </button>
+            
+            {showQ9DocBook && (
+              <div style={{
+                marginTop: '12px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+              }}>
+                {q9DocBookData.map((item, index) => (
+                  <div key={item.label} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: index < q9DocBookData.length - 1 ? '1px solid ' + COLORS.quinary : 'none',
+                  }}>
+                    <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+                    <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  margin: '12px 0 0',
+                  padding: '12px',
+                  background: COLORS.cardBg,
+                  borderRadius: '8px',
+                }}>
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> Peter Singer's "Animal Liberation" (55 mentions) remains the most influential single piece of media — a 1975 book still converting people decades later. Australian content like Four Corners (18) shows local journalism has significant impact.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Other Reasons Breakdown Toggle */}
+          <div style={{ marginTop: '12px' }}>
+            <button
+              onClick={() => setShowQ9Other(!showQ9Other)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: '1px solid ' + COLORS.tertiary,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showQ9Other ? '▼' : '▶'} "Other Reasons" Breakdown (176 responses)
+            </button>
+            
+            {showQ9Other && (
+              <div style={{
+                marginTop: '12px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+              }}>
+                {q9OtherData.map((item, index) => (
+                  <div key={item.label} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: index < q9OtherData.length - 1 ? '1px solid ' + COLORS.quinary : 'none',
+                  }}>
+                    <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+                    <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  margin: '12px 0 0',
+                  padding: '12px',
+                  background: COLORS.cardBg,
+                  borderRadius: '8px',
+                }}>
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> Many supporters (27) were lifelong or childhood vegetarians/vegans — they didn't convert, they never ate meat. Direct witness experiences like seeing slaughter/transport firsthand (18) or working on farms/sanctuaries (18) are powerful catalysts.
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Cruelty awareness dominates: Factory farming cruelty (45.0%) and emotional attachment to animals (44.5%) are virtually tied as top motivators for dietary change.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Truth-telling works: "Learning the truth about cruelty" (29.6%) reinforces that exposure and education are key drivers of behaviour change.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              AA direct attribution: 11.8% credit "The work of Animals Australia" directly, plus 3.4% for AA TV campaigns — combined ~15% direct AA influence on dietary choices.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Health and environment secondary: Health benefits (7.5%) and environmental concerns (12.5%) are much lower motivators than animal welfare for this audience.
+            </p>
+          </div>
         </div>
       </div>
     </div>
