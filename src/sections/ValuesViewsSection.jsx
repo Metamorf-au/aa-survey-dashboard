@@ -247,7 +247,7 @@ const StatCard = ({ value, label, colorType }) => {
     primary: '#2D5A47',
     secondary: '#1E7B8C',
     accent: '#E8724A',
-    warning: '#f7b02eff',
+    warning: '#f74f2eff',
   };
   const bgColor = colorMap[colorType] || colorMap.primary;
   
