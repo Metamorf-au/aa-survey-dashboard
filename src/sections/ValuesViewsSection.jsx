@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 // Color palette - nature/animal welfare inspired (consistent with About You section)
@@ -73,7 +73,7 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div style={{
         background: 'white',
-        border: `1px solid ${COLORS.quinary}`,
+        border: '1px solid ' + COLORS.quinary,
         borderRadius: '8px',
         padding: '12px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -92,58 +92,47 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 // Horizontal Bar Chart Component
-const HorizontalBarChart = ({ data, maxValue, height = 400 }) => (
-  <ResponsiveContainer width="100%" height={height}>
-    <BarChart
-      data={data}
-      layout="vertical"
-      margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
-    >
-      <XAxis type="number" domain={[0, maxValue]} hide />
-      <YAxis
-        type="category"
-        dataKey="label"
-        width={200}
-        tick={{ fontSize: 13, fill: COLORS.text }}
-        axisLine={false}
-        tickLine={false}
-      />
-      <Tooltip content={<CustomTooltip />} />
-      <Bar dataKey="count" radius={[0, 4, 4, 0]}>
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
-        ))}
-      </Bar>
-    </BarChart>
-  </ResponsiveContainer>
-);
-
-// Key Insight Component
-const KeyInsight = ({ children }) => (
-  <div style={{
-    fontSize: '13px',
-    color: COLORS.textMuted,
-    marginTop: '16px',
-    padding: '12px',
-    background: COLORS.background,
-    borderRadius: '8px',
-    borderLeft: `3px solid ${COLORS.accent}`,
-  }}>
-    <strong style={{ color: COLORS.primary }}>Key insight:</strong> {children}
-  </div>
-);
+const HorizontalBarChart = ({ data, maxValue, height }) => {
+  const chartHeight = height || 400;
+  return (
+    <ResponsiveContainer width="100%" height={chartHeight}>
+      <BarChart
+        data={data}
+        layout="vertical"
+        margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
+      >
+        <XAxis type="number" domain={[0, maxValue]} hide />
+        <YAxis
+          type="category"
+          dataKey="label"
+          width={200}
+          tick={{ fontSize: 13, fill: COLORS.text }}
+          axisLine={false}
+          tickLine={false}
+        />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
+        <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+          {data.map((entry, index) => (
+            <Cell key={'cell-' + index} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+          ))}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
 
 // Stat Card Component - with distinct colours for accessibility
-const StatCard = ({ value, label, colorType = 'primary' }) => {
+const StatCard = ({ value, label, colorType }) => {
   const colorMap = {
-    primary: '#2D5A47',    // Dark green
-    secondary: '#1E7B8C',  // Teal/cyan - distinct from green
-    accent: '#E8724A',     // Orange - high contrast
+    primary: '#2D5A47',
+    secondary: '#1E7B8C',
+    accent: '#E8724A',
   };
+  const bgColor = colorMap[colorType] || colorMap.primary;
   
   return (
     <div style={{
-      background: colorMap[colorType],
+      background: bgColor,
       color: 'white',
       padding: '16px 20px',
       borderRadius: '10px',
@@ -165,7 +154,6 @@ const ValuesViewsSection = () => {
       minHeight: '100vh',
       padding: '32px',
     }}>
-      {/* Section Header */}
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto 32px',
@@ -176,14 +164,13 @@ const ValuesViewsSection = () => {
           fontWeight: '700',
           color: COLORS.primary,
         }}>
-          Your Values & Views
+          Your Values and Views
         </h2>
         <p style={{ margin: 0, fontSize: '15px', color: COLORS.textMuted }}>
           Understanding what matters most to Animals Australia supporters
         </p>
       </div>
 
-      {/* Main Content Container */}
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
@@ -191,70 +178,64 @@ const ValuesViewsSection = () => {
         flexDirection: 'column',
         gap: '24px',
       }}>
-
-      {/* Q4 - Causes for Donation */}
-      <div style={{
-        background: COLORS.cardBg,
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-        border: `1px solid ${COLORS.quinary}`,
-        marginBottom: '24px',
-      }}>
-        <SectionHeader
-          question="Q4"
-          title="Select 3 causes you would consider making a donation towards"
-          subtitle="Respondents could select up to 3 options"
-          respondents={5024}
-        />
-
-        {/* Top Stats */}
-        <div style={{
-          display: 'flex',
-          gap: '16px',
-          marginBottom: '24px',
-          flexWrap: 'wrap',
-        }}>
-          <StatCard value="68.5%" label="Factory farming" colorType="primary" />
-          <StatCard value="59.1%" label="Live export" colorType="secondary" />
-          <StatCard value="43.8%" label="Slaughterhouse cruelty" colorType="accent" />
-        </div>
-
-        {/* Horizontal Bar Chart */}
-        <HorizontalBarChart data={q4Data} maxValue={3800} height={420} />
-
-        {/* Key Insight */}
-        <div style={{
-          fontSize: '13px',
-          color: COLORS.textMuted,
-          marginTop: '16px',
-          padding: '12px',
-          background: COLORS.background,
-          borderRadius: '8px',
-          borderLeft: `3px solid ${COLORS.accent}`,
-        }}>
-          <strong style={{ color: COLORS.primary }}>Key insights:</strong>
-          
-          <p style={{ margin: '12px 0 0 0' }}>
-            Factory farming (68.5%), live export (59.1%), and slaughterhouse cruelty (43.8%) are the clear top 3 priorities — these "visceral" cruelty issues with high public awareness dominate supporter interest.
-          </p>
-          
-          <p style={{ margin: '12px 0 0 0' }}>
-            Fish farm cruelty ranked last at just 4.7%, suggesting a potential awareness gap or lower perceived urgency around aquaculture welfare.
-          </p>
-          
-          <p style={{ margin: '12px 0 0 0' }}>
-            The mid-tier causes (food system, dairy, legal actions) cluster tightly around 18%, indicating similar levels of interest.
-          </p>
-        </div>
-
-        {/* Placeholder for Q5-Q9 */}
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          border: `1px solid ${COLORS.quinary}`,
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q4"
+            title="Select 3 causes you would consider making a donation towards"
+            subtitle="Respondents could select up to 3 options"
+            respondents={5024}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="68.5%" label="Factory farming" colorType="primary" />
+            <StatCard value="59.1%" label="Live export" colorType="secondary" />
+            <StatCard value="43.8%" label="Slaughterhouse cruelty" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q4Data} maxValue={3800} height={420} />
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Factory farming (68.5%), live export (59.1%), and slaughterhouse cruelty (43.8%) are the clear top 3 priorities - these high-profile cruelty issues with strong public awareness dominate supporter interest.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Fish farm cruelty ranked last at just 4.7%, suggesting a potential awareness gap or lower perceived urgency around aquaculture welfare.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              The mid-tier causes (food system, dairy, legal actions) cluster tightly around 18%, indicating similar levels of interest.
+            </p>
+          </div>
+        </div>
+
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
