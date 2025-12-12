@@ -88,42 +88,69 @@ const otherPartiesData = [
   { label: 'Other minor parties', count: 17 },
 ];
 
-// Stat Card Component
-const StatCard = ({ value, label, subtext, accent = false }) => (
-  <div style={{
-    background: accent ? COLORS.accent : COLORS.cardBg,
-    borderRadius: '12px',
-    padding: '20px',
-    boxShadow: accent ? 'none' : '0 1px 3px rgba(0,0,0,0.08)',
-    border: accent ? 'none' : `1px solid ${COLORS.quinary}`,
-  }}>
-    <div style={{
-      fontSize: '32px',
-      fontWeight: 700,
-      color: accent ? 'white' : COLORS.primary,
-      lineHeight: 1.1,
-    }}>
-      {value}
-    </div>
-    <div style={{
-      fontSize: '14px',
-      fontWeight: 500,
-      color: accent ? 'rgba(255,255,255,0.9)' : COLORS.text,
-      marginTop: '4px',
-    }}>
-      {label}
-    </div>
-    {subtext && (
+// Stat Card Component - with distinct colours for accessibility
+const StatCard = ({ value, label, subtext, accent = false, colorType }) => {
+  // If colorType is provided, use the new accessible color scheme
+  if (colorType) {
+    const colorMap = {
+      primary: '#2D5A47',    // Dark green
+      secondary: '#1E7B8C',  // Teal/cyan - distinct from green
+      accent: '#E8724A',     // Orange - high contrast
+    };
+    const bgColor = colorMap[colorType] || colorMap.primary;
+    
+    return (
       <div style={{
-        fontSize: '12px',
-        color: accent ? 'rgba(255,255,255,0.7)' : COLORS.textMuted,
-        marginTop: '2px',
+        background: bgColor,
+        color: 'white',
+        padding: '16px 20px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        minWidth: '140px',
       }}>
-        {subtext}
+        <div style={{ fontSize: '28px', fontWeight: '700' }}>{value}</div>
+        <div style={{ fontSize: '12px', opacity: 0.9, marginTop: '4px' }}>{label}</div>
       </div>
-    )}
-  </div>
-);
+    );
+  }
+  
+  // Legacy style for Q1 stat cards
+  return (
+    <div style={{
+      background: accent ? COLORS.accent : COLORS.cardBg,
+      borderRadius: '12px',
+      padding: '20px',
+      boxShadow: accent ? 'none' : '0 1px 3px rgba(0,0,0,0.08)',
+      border: accent ? 'none' : '1px solid ' + COLORS.quinary,
+    }}>
+      <div style={{
+        fontSize: '32px',
+        fontWeight: 700,
+        color: accent ? 'white' : COLORS.primary,
+        lineHeight: 1.1,
+      }}>
+        {value}
+      </div>
+      <div style={{
+        fontSize: '14px',
+        fontWeight: 500,
+        color: accent ? 'rgba(255,255,255,0.9)' : COLORS.text,
+        marginTop: '4px',
+      }}>
+        {label}
+      </div>
+      {subtext && (
+        <div style={{
+          fontSize: '12px',
+          color: accent ? 'rgba(255,255,255,0.7)' : COLORS.textMuted,
+          marginTop: '2px',
+        }}>
+          {subtext}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // Section Header Component
 const SectionHeader = ({ question, title, respondents }) => (
@@ -301,13 +328,25 @@ export default function AboutYouSection() {
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          border: `1px solid ${COLORS.quinary}`,
+          border: '1px solid ' + COLORS.quinary,
         }}>
           <SectionHeader 
             question="Q2" 
             title="How did you first learn about Animals Australia?" 
             respondents={5119}
           />
+
+          {/* Top Stats */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="33.0%" label="Don't remember" colorType="primary" />
+            <StatCard value="31.2%" label="TV/News/Media" colorType="secondary" />
+            <StatCard value="19.3%" label="Social media" colorType="accent" />
+          </div>
           
           <HorizontalBarChart data={discoveryData} maxValue={1800} height={480} />
           
@@ -437,13 +476,25 @@ export default function AboutYouSection() {
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          border: `1px solid ${COLORS.quinary}`,
+          border: '1px solid ' + COLORS.quinary,
         }}>
           <SectionHeader 
             question="Q3" 
             title="How would you describe your political leanings?" 
             respondents={5119}
           />
+
+          {/* Top Stats */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="34.9%" label="Animal Justice Party" colorType="primary" />
+            <StatCard value="20.1%" label="Greens" colorType="secondary" />
+            <StatCard value="19.7%" label="Labor" colorType="accent" />
+          </div>
           
           <HorizontalBarChart data={politicalData} maxValue={1900} height={380} />
           
