@@ -162,49 +162,60 @@ const SectionHeader = ({ question, title, respondents }) => (
   </div>
 );
 
-// Horizontal Bar Chart Component
-const HorizontalBarChart = ({ data, maxValue, showPercentage = true }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-    {data.map((item, index) => (
-      <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{
-          width: '140px',
-          fontSize: '13px',
-          color: COLORS.text,
-          textAlign: 'right',
-          flexShrink: 0,
-        }}>
-          {item.label}
-        </div>
-        <div style={{
-          flex: 1,
-          height: '28px',
-          background: COLORS.background,
-          borderRadius: '4px',
-          overflow: 'hidden',
-          position: 'relative',
-        }}>
-          <div style={{
-            width: `${(item.count / maxValue) * 100}%`,
-            height: '100%',
-            background: CHART_COLORS[index % CHART_COLORS.length],
-            borderRadius: '4px',
-            transition: 'width 0.5s ease-out',
-          }} />
-        </div>
-        <div style={{
-          width: '70px',
-          fontSize: '13px',
-          color: COLORS.textMuted,
-          textAlign: 'right',
-          flexShrink: 0,
-        }}>
-          {showPercentage ? `${item.pct}%` : item.count.toLocaleString()}
-        </div>
+// Custom Tooltip Component
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div style={{
+        background: 'white',
+        border: `1px solid ${COLORS.quinary}`,
+        borderRadius: '8px',
+        padding: '12px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+      }}>
+        <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: COLORS.text, fontWeight: '500' }}>
+          {data.label}
+        </p>
+        <p style={{ margin: 0, fontSize: '14px', color: COLORS.primary, fontWeight: '600' }}>
+          {data.count.toLocaleString()} respondents ({data.pct}%)
+        </p>
       </div>
-    ))}
-  </div>
-);
+    );
+  }
+  return null;
+};
+
+// Horizontal Bar Chart Component using Recharts
+const HorizontalBarChart = ({ data, maxValue, height }) => {
+  const chartHeight = height || Math.max(data.length * 40, 150);
+  
+  return (
+    <ResponsiveContainer width="100%" height={chartHeight}>
+      <BarChart
+        data={data}
+        layout="vertical"
+        margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
+      >
+        <XAxis type="number" domain={[0, maxValue]} hide />
+        <YAxis
+          type="category"
+          dataKey="label"
+          width={140}
+          tick={{ fontSize: 13, fill: COLORS.text }}
+          axisLine={false}
+          tickLine={false}
+        />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
+        <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+          ))}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
 
 export default function AboutYouSection() {
   const [showSocialBreakdown, setShowSocialBreakdown] = useState(false);
@@ -269,7 +280,7 @@ export default function AboutYouSection() {
             <StatCard value="14.2%" label="Not provided" subtext="729 respondents" accent />
           </div>
           
-          <HorizontalBarChart data={ageData} maxValue={2500} />
+          <HorizontalBarChart data={ageData} maxValue={2500} height={220} />
           
           <p style={{
             fontSize: '13px',
@@ -298,7 +309,7 @@ export default function AboutYouSection() {
             respondents={5119}
           />
           
-          <HorizontalBarChart data={discoveryData} maxValue={1800} />
+          <HorizontalBarChart data={discoveryData} maxValue={1800} height={480} />
           
           {/* Social Media Breakdown */}
           <div style={{ marginTop: '16px' }}>
@@ -434,7 +445,7 @@ export default function AboutYouSection() {
             respondents={5119}
           />
           
-          <HorizontalBarChart data={politicalData} maxValue={1900} />
+          <HorizontalBarChart data={politicalData} maxValue={1900} height={380} />
           
           {/* Other Parties Toggle */}
           <button
