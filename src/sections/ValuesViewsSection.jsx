@@ -77,29 +77,42 @@ const q6OtherData = [
 // Section Header Component
 const SectionHeader = ({ question, title, respondents, subtitle }) => (
   <div style={{ marginBottom: '20px' }}>
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '4px' }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      marginBottom: '4px',
+    }}>
       <span style={{
         background: COLORS.primary,
         color: 'white',
         padding: '4px 10px',
         borderRadius: '4px',
-        fontSize: '13px',
-        fontWeight: '600',
+        fontSize: '12px',
+        fontWeight: 600,
       }}>
         {question}
       </span>
-      <h3 style={{ margin: 0, fontSize: '18px', color: COLORS.text, fontWeight: '600' }}>
-        {title}
-      </h3>
+      <span style={{
+        fontSize: '13px',
+        color: COLORS.textMuted,
+      }}>
+        {respondents.toLocaleString()} respondents
+      </span>
     </div>
+    <h3 style={{
+      fontSize: '18px',
+      fontWeight: 600,
+      color: COLORS.text,
+      margin: 0,
+    }}>
+      {title}
+    </h3>
     {subtitle && (
       <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: COLORS.textMuted, fontStyle: 'italic' }}>
         {subtitle}
       </p>
     )}
-    <p style={{ margin: '8px 0 0 0', fontSize: '13px', color: COLORS.textMuted }}>
-      {respondents.toLocaleString()} respondents
-    </p>
   </div>
 );
 
