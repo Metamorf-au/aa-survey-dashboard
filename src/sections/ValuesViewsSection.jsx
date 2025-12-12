@@ -247,6 +247,7 @@ const StatCard = ({ value, label, colorType }) => {
     primary: '#2D5A47',
     secondary: '#1E7B8C',
     accent: '#E8724A',
+    warning: '#e8b14aff',
   };
   const bgColor = colorMap[colorType] || colorMap.primary;
   
@@ -539,7 +540,7 @@ const ValuesViewsSection = () => {
           }}>
             <StatCard value="90.7%" label="Pig farrowing crates" colorType="primary" />
             <StatCard value="86.4%" label="No humane slaughter" colorType="secondary" />
-            <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="accent" />
+            <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="warning" />
           </div>
 
           <HorizontalBarChart data={q7Data} maxValue={5000} height={460} />
