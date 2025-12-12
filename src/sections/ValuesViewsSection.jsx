@@ -74,6 +74,21 @@ const q6OtherData = [
   { label: 'Other minor responses', count: 170 },
 ];
 
+// Q7 Data - Awareness of cruelty practices (sorted by awareness descending)
+const q7Data = [
+  { label: 'Pig farrowing crates', fullLabel: "In factory farms, mother pigs are confined in restricted 'farrowing crates'", count: 4641, pct: 90.7 },
+  { label: 'No humane slaughter', fullLabel: "There is no such thing as 'humane slaughter'", count: 4425, pct: 86.4 },
+  { label: 'Dairy cow pregnancy cycle', fullLabel: 'Dairy cows are kept almost continuously pregnant and give birth each year', count: 4399, pct: 85.9 },
+  { label: 'Meat chicken suffering', fullLabel: "Chickens raised for 'meat' in all commercial systems endure short painful lives", count: 4251, pct: 83.0 },
+  { label: 'Male chicks killed', fullLabel: 'Male chicks born into commercial egg production systems are considered worthless', count: 3883, pct: 75.9 },
+  { label: 'Farming drives extinction', fullLabel: 'The biggest driver of biodiversity loss and species extinction is farming animals', count: 3878, pct: 75.8 },
+  { label: 'Unequal legal protection', fullLabel: 'Farmed animals do not receive the same legal protection as dogs and cats', count: 3743, pct: 73.1 },
+  { label: 'Fish farm conditions', fullLabel: 'Fish in industrial farms are kept in crowded, unhygienic conditions', count: 3703, pct: 72.3 },
+  { label: 'Same slaughterhouses', fullLabel: 'Most animals in commercial farming systems go to same slaughterhouses', count: 3010, pct: 58.8 },
+  { label: 'Piglet tail docking', fullLabel: 'Piglets in factory farms can legally have their tails cut off', count: 2908, pct: 56.8 },
+  { label: 'Hen lifespan (18 months)', fullLabel: 'Egg laying hens in all commercial systems are slaughtered at 18 months', count: 2428, pct: 47.4 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, respondents, subtitle }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -444,6 +459,63 @@ const ValuesViewsSection = () => {
           </div>
         </div>
 
+        {/* Q7 - Awareness of Cruelty Practices */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q7"
+            title="Are you aware of the following cruelty practices and issues within the Australian farming industry?"
+            subtitle="Respondents answered Yes or No for each issue"
+            respondents={4965}
+          />
+
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="90.7%" label="Pig farrowing crates" colorType="primary" />
+            <StatCard value="86.4%" label="No humane slaughter" colorType="secondary" />
+            <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="accent" />
+          </div>
+
+          <HorizontalBarChart data={q7Data} maxValue={5000} height={460} />
+
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              High baseline awareness: Average awareness is 73.3% across all issues - this is an informed and engaged supporter base.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Top awareness cluster: Pig farrowing crates (90.7%), humane slaughter myth (86.4%), and dairy cow pregnancy (85.9%) are the most well-known issues among supporters.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Education opportunities: Egg laying hen lifespan (47.4%) and piglet tail docking (56.8%) have the lowest awareness - these represent potential areas for future campaigns.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Fish awareness gap: Fish farm conditions (72.3%) awareness is relatively high, yet fish ranked last for donations in Q4 (4.7%) - awareness does not equal priority for supporters.
+            </p>
+          </div>
+        </div>
+
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -453,7 +525,7 @@ const ValuesViewsSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q7-Q9 sections will be added here...
+            Q8-Q9 sections will be added here...
           </p>
         </div>
       </div>
