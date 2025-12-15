@@ -54,6 +54,15 @@ const q10OtherData = [
   { label: 'Other minor responses', count: 8 },
 ];
 
+// Q11 Data - Monthly donor consideration (sorted by count)
+const q11Data = [
+  { label: 'Already a monthly donor', fullLabel: "I'm already a proud monthly donor", count: 2000, pct: 39.1 },
+  { label: 'Prefer one-off gifts', fullLabel: 'I currently prefer to give one-off gifts', count: 1888, pct: 36.9 },
+  { label: 'Not right now', fullLabel: 'Not right now', count: 1060, pct: 20.7 },
+  { label: 'Yes, would like to help', fullLabel: "Yes, I'd like to help animals all year round", count: 97, pct: 1.9 },
+  { label: 'Want more info first', fullLabel: 'I would like some more information first', count: 69, pct: 1.3 },
+];
+
 // Section Header Component (matching AboutYouSection format)
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -331,7 +340,67 @@ const YourSupportSection = () => {
           </div>
         </div>
 
-        {/* Placeholder for Q11-Q13 */}
+        {/* Q11 - Monthly Donor Consideration */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q11"
+            title="Would you consider becoming a monthly donor to help support future AA work?"
+            subtitle="Select one"
+            respondents={5077}
+          />
+
+          {/* Top 3 Stat Cards */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="39.1%" label="Already monthly donors" colorType="primary" />
+            <StatCard value="36.9%" label="Prefer one-off gifts" colorType="secondary" />
+            <StatCard value="20.7%" label="Not right now" colorType="accent" />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart data={q11Data} maxValue={2200} height={220} />
+
+          {/* Key Insights */}
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Strong existing monthly donor base — 39.1% are already proud monthly donors, indicating AA has successfully converted a significant portion of supporters to recurring giving.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              One-off giving preference is substantial — 36.9% prefer one-off gifts, suggesting many supporters value flexibility in their giving or may be on fixed incomes (consistent with the older demographic).
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Conversion opportunity is modest — only 3.2% combined are open to becoming monthly donors (1.9% ready, 1.3% want more info). The 20.7% saying "not right now" may represent future potential with the right timing or approach.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Combined giving commitment is high — 76% are either already monthly donors (39.1%) or prefer one-off giving (36.9%), demonstrating strong overall financial support regardless of frequency preference.
+            </p>
+          </div>
+        </div>
+
+        {/* Placeholder for Q12-Q13 */}
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -341,7 +410,7 @@ const YourSupportSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q11-Q13 sections will be added here...
+            Q12-Q13 sections will be added here...
           </p>
         </div>
       </div>
