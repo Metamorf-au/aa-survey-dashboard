@@ -1,0 +1,408 @@
+import React, { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+
+// Color palette - nature/animal welfare inspired (matching other sections)
+const COLORS = {
+  primary: '#2D5A47',
+  secondary: '#1E7B8C',
+  tertiary: '#6B9E8C',
+  quaternary: '#8FBFAB',
+  quinary: '#B3D9C9',
+  accent: '#E8724A',
+  accentLight: '#F4A382',
+  neutral: '#64748B',
+  neutralLight: '#94A3B8',
+  background: '#F8FAF9',
+  cardBg: '#FFFFFF',
+  text: '#1E293B',
+  textMuted: '#64748B',
+};
+
+const CHART_COLORS = [
+  '#2D5A47', '#1E7B8C', '#6B9E8C', '#8FBFAB', '#B3D9C9',
+  '#E8724A', '#F4A382', '#64748B', '#94A3B8', '#CBD5E1',
+  '#7C9A8E', '#A3C4B5', '#5D8A7D', '#9DB5AC'
+];
+
+// Q10 Data - Engagement Methods (sorted by count)
+const q10Data = [
+  { label: 'Subscribed to emails', fullLabel: "I'm subscribed to read emails", count: 3948, pct: 77.1 },
+  { label: 'Sign petitions/actions', fullLabel: 'I take actions and sign petitions lobbying decision-makers', count: 3487, pct: 68.1 },
+  { label: 'Donate to appeals', fullLabel: 'I donate to fundraising appeals', count: 2590, pct: 50.6 },
+  { label: 'Read postal publications', fullLabel: 'I read postal publications, such as the Supporter Update', count: 2212, pct: 43.2 },
+  { label: 'Social media updates', fullLabel: 'I keep up to date via social media', count: 1383, pct: 27.0 },
+  { label: 'Visit AA website', fullLabel: 'I visit the Animals Australia website', count: 1251, pct: 24.4 },
+  { label: 'Share social content', fullLabel: 'I share social media content', count: 992, pct: 19.4 },
+  { label: 'Pledges & resources', fullLabel: 'I take pledges and order supportive resources', count: 831, pct: 16.2 },
+  { label: 'Purchase merchandise', fullLabel: 'I purchase merchandise', count: 797, pct: 15.6 },
+  { label: 'Watch YouTube videos', fullLabel: 'I watch YouTube videos', count: 378, pct: 7.4 },
+  { label: 'Membership portal', fullLabel: 'I access the My Animals Australia membership portal', count: 372, pct: 7.3 },
+  { label: 'Other', fullLabel: 'Other (free-text responses)', count: 234, pct: 4.6, hasBreakdown: true },
+  { label: 'Phone support team', fullLabel: 'I contact the Supporter Services team via phone', count: 93, pct: 1.8 },
+  { label: 'Hold fundraisers', fullLabel: 'I hold fundraisers', count: 19, pct: 0.4 },
+];
+
+// Q10 "Other" breakdown - categorised from 234 free-text responses
+// Note: 148 responses (63%) duplicated existing options or were general statements
+const q10OtherBreakdown = [
+  { label: 'Avoid distressing content', count: 21 },
+  { label: 'Word of mouth & personal advocacy', count: 18 },
+  { label: 'Bequest/legacy giving', count: 16 },
+  { label: 'Direct political action (MPs, letters)', count: 12 },
+  { label: 'Wildlife rescue/volunteering', count: 6 },
+  { label: 'Feedback/suggestions', count: 5 },
+  { label: 'Duplicate of existing options', count: 94 },
+  { label: 'General support statements', count: 54 },
+  { label: 'Other minor responses', count: 8 },
+];
+
+// Section Header Component
+const SectionHeader = ({ question, title, subtitle, respondents }) => (
+  <div style={{ marginBottom: '20px' }}>
+    <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '4px' }}>
+      <span style={{
+        background: COLORS.primary,
+        color: 'white',
+        padding: '4px 10px',
+        borderRadius: '6px',
+        fontSize: '13px',
+        fontWeight: '600',
+      }}>
+        {question}
+      </span>
+      <span style={{ fontSize: '13px', color: COLORS.textMuted }}>
+        {respondents.toLocaleString()} respondents
+      </span>
+    </div>
+    <h3 style={{
+      margin: '8px 0 0',
+      fontSize: '18px',
+      fontWeight: '600',
+      color: COLORS.text,
+    }}>
+      {title}
+    </h3>
+    {subtitle && (
+      <p style={{
+        margin: '4px 0 0',
+        fontSize: '14px',
+        color: COLORS.textMuted,
+        fontStyle: 'italic',
+      }}>
+        {subtitle}
+      </p>
+    )}
+  </div>
+);
+
+// Stat Card Component - colour-blind accessible
+const StatCard = ({ value, label, colorType }) => {
+  const colorMap = {
+    primary: '#2D5A47',
+    secondary: '#1E7B8C',
+    accent: '#E8724A',
+  };
+  const bgColor = colorMap[colorType] || colorMap.primary;
+
+  return (
+    <div style={{
+      background: bgColor,
+      color: 'white',
+      padding: '16px 20px',
+      borderRadius: '10px',
+      textAlign: 'center',
+      flex: '1',
+      minWidth: '160px',
+    }}>
+      <div style={{ fontSize: '28px', fontWeight: '700' }}>{value}</div>
+      <div style={{ fontSize: '12px', opacity: 0.9, marginTop: '4px', lineHeight: '1.3' }}>{label}</div>
+    </div>
+  );
+};
+
+// Custom Tooltip
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div style={{
+        background: 'white',
+        border: '1px solid #e2e8f0',
+        borderRadius: '8px',
+        padding: '12px',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+        maxWidth: '280px',
+      }}>
+        <p style={{ margin: '0 0 8px 0', fontSize: '13px', color: COLORS.text, fontWeight: '500' }}>
+          {data.fullLabel || data.label}
+        </p>
+        <p style={{ margin: 0, fontSize: '14px', color: COLORS.primary, fontWeight: '600' }}>
+          {data.count.toLocaleString()} selections ({data.pct}%)
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+// Horizontal Bar Chart Component
+const HorizontalBarChart = ({ data, maxValue, height }) => {
+  const chartHeight = height || Math.max(400, data.length * 36);
+  return (
+    <ResponsiveContainer width="100%" height={chartHeight}>
+      <BarChart
+        data={data}
+        layout="vertical"
+        margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
+      >
+        <XAxis type="number" domain={[0, maxValue]} hide />
+        <YAxis
+          type="category"
+          dataKey="label"
+          width={180}
+          tick={{ fontSize: 13, fill: COLORS.text }}
+          axisLine={false}
+          tickLine={false}
+        />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
+        <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+          ))}
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+// Key Insight Component
+const KeyInsight = ({ children }) => (
+  <div style={{
+    fontSize: '14px',
+    color: COLORS.text,
+    margin: '20px 0 0',
+    padding: '16px',
+    background: COLORS.background,
+    borderRadius: '8px',
+    borderLeft: `4px solid ${COLORS.accent}`,
+    lineHeight: '1.6',
+  }}>
+    <strong style={{ color: COLORS.primary }}>Key Insights:</strong>
+    <div style={{ marginTop: '8px' }}>{children}</div>
+  </div>
+);
+
+// Expandable Breakdown Component
+const ExpandableBreakdown = ({ title, total, data, show, onToggle, insight }) => (
+  <div style={{ marginTop: '16px' }}>
+    <button
+      onClick={onToggle}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        background: 'transparent',
+        border: `1px solid ${COLORS.quinary}`,
+        borderRadius: '8px',
+        padding: '10px 16px',
+        cursor: 'pointer',
+        fontSize: '14px',
+        color: COLORS.primary,
+        fontWeight: '500',
+        width: '100%',
+        justifyContent: 'space-between',
+      }}
+    >
+      <span>{title} ({total} total)</span>
+      <span style={{ fontSize: '12px' }}>{show ? '▼' : '▶'}</span>
+    </button>
+
+    {show && data.length > 0 && (
+      <div style={{
+        marginTop: '12px',
+        padding: '16px',
+        background: COLORS.background,
+        borderRadius: '8px',
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {data.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '8px 12px',
+                background: 'white',
+                borderRadius: '6px',
+                border: `1px solid ${COLORS.quinary}`,
+              }}
+            >
+              <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+              <span style={{ fontSize: '13px', color: COLORS.primary, fontWeight: '600' }}>
+                {item.count}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Insight within breakdown */}
+        {insight && (
+          <p style={{
+            fontSize: '13px',
+            color: COLORS.text,
+            margin: '16px 0 0',
+            padding: '12px',
+            background: 'white',
+            borderRadius: '6px',
+            borderLeft: `3px solid ${COLORS.accent}`,
+            lineHeight: '1.5',
+          }}>
+            <strong style={{ color: COLORS.primary }}>Insight:</strong> {insight}
+          </p>
+        )}
+      </div>
+    )}
+
+    {show && data.length === 0 && (
+      <div style={{
+        marginTop: '12px',
+        padding: '16px',
+        background: COLORS.background,
+        borderRadius: '8px',
+        textAlign: 'center',
+        color: COLORS.textMuted,
+        fontSize: '13px',
+        fontStyle: 'italic',
+      }}>
+        Breakdown data will be added from Part 2 analysis
+      </div>
+    )}
+  </div>
+);
+
+// Main Component
+const YourSupportSection = () => {
+  const [showQ10Other, setShowQ10Other] = useState(false);
+
+  return (
+    <div style={{
+      fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+      background: COLORS.background,
+      minHeight: '100vh',
+      padding: '32px',
+    }}>
+      {/* Section Header */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto 32px',
+      }}>
+        <h2 style={{
+          margin: '0 0 8px 0',
+          fontSize: '28px',
+          fontWeight: '700',
+          color: COLORS.primary,
+        }}>
+          Your Support
+        </h2>
+        <p style={{
+          margin: 0,
+          fontSize: '15px',
+          color: COLORS.textMuted,
+        }}>
+          How supporters engage with and contribute to Animals Australia
+        </p>
+      </div>
+
+      {/* Main Content */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+      }}>
+
+        {/* Q10 - Engagement Methods */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: `1px solid ${COLORS.quinary}`,
+        }}>
+          <SectionHeader
+            question="Q10"
+            title="How do you like to keep updated and engaged with AA's work?"
+            subtitle="Select all that apply"
+            respondents={5027}
+          />
+
+          {/* Top 3 Stat Cards */}
+          <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
+            <StatCard
+              value="77.1%"
+              label="Subscribed to emails"
+              colorType="primary"
+            />
+            <StatCard
+              value="68.1%"
+              label="Sign petitions & actions"
+              colorType="secondary"
+            />
+            <StatCard
+              value="50.6%"
+              label="Donate to appeals"
+              colorType="accent"
+            />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart data={q10Data} maxValue={4200} height={520} />
+
+          {/* "Other" Breakdown */}
+          <ExpandableBreakdown
+            title='"Other" Breakdown'
+            total={234}
+            data={q10OtherBreakdown}
+            show={showQ10Other}
+            onToggle={() => setShowQ10Other(!showQ10Other)}
+            insight="63% of responses (148) duplicated existing options or were general statements, suggesting the survey options were comprehensive but perhaps unclear. Key unique themes: many supporters actively avoid distressing content due to emotional impact (21), engage in personal word-of-mouth advocacy (18), and have included AA in their wills (16). Bequest/legacy giving represents a notable gap — it's clearly important to supporters but isn't captured as a formal engagement option."
+          />
+
+          {/* Key Insights */}
+          <KeyInsight>
+            <p style={{ margin: '0 0 12px 0' }}>
+              <strong>Email dominates engagement</strong> — over three-quarters (77.1%) of supporters stay connected through email subscriptions, making it the single most important communication channel. This aligns with the older demographic profile and suggests email campaigns remain highly effective.
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              <strong>Active advocacy is strong</strong> — 68.1% take actions and sign petitions, demonstrating that AA supporters are not passive donors but engaged advocates willing to lobby decision-makers. Combined with the 50.6% who donate to appeals, this shows a highly committed supporter base.
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              <strong>Traditional channels remain relevant</strong> — postal publications reach 43.2% of supporters, reinforcing that print communications still matter for this demographic despite digital alternatives.
+            </p>
+            <p style={{ margin: 0 }}>
+              <strong>Untapped potential in digital/community</strong> — membership portal (7.3%), YouTube (7.4%), and fundraising (0.4%) show low engagement, suggesting opportunities to grow these channels or reconsider their prominence.
+            </p>
+          </KeyInsight>
+        </div>
+
+        {/* Placeholder for Q11-Q13 */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: `1px solid ${COLORS.quinary}`,
+          opacity: 0.5,
+        }}>
+          <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
+            Q11-Q13 sections will be added here...
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default YourSupportSection;
