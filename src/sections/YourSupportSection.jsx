@@ -56,11 +56,20 @@ const q10OtherData = [
 
 // Q11 Data - Monthly donor consideration (sorted by count)
 const q11Data = [
-  { label: 'Already a monthly donor', fullLabel: "I'm already a proud monthly donor", count: 2000, pct: 39.1 },
-  { label: 'Prefer one-off gifts', fullLabel: 'I currently prefer to give one-off gifts', count: 1888, pct: 36.9 },
-  { label: 'Not right now', fullLabel: 'Not right now', count: 1060, pct: 20.7 },
+  { label: 'Already a monthly donor', fullLabel: "I'm already a proud monthly donor", count: 2000, pct: 39.4 },
+  { label: 'Prefer one-off gifts', fullLabel: 'I currently prefer to give one-off gifts', count: 1888, pct: 37.2 },
+  { label: 'Not right now', fullLabel: 'Not right now', count: 1060, pct: 20.9 },
   { label: 'Yes, would like to help', fullLabel: "Yes, I'd like to help animals all year round", count: 97, pct: 1.9 },
-  { label: 'Want more info first', fullLabel: 'I would like some more information first', count: 69, pct: 1.3 },
+  { label: 'Want more info first', fullLabel: 'I would like some more information first', count: 69, pct: 1.4 },
+];
+
+// Q12 Data - Gift in Will consideration (sorted by count)
+const q12Data = [
+  { label: 'Not at this time', fullLabel: 'Not at this time', count: 1909, pct: 37.9 },
+  { label: 'Would consider including AA', fullLabel: 'Consider including Animals Australia in my will', count: 934, pct: 18.5 },
+  { label: 'Already included AA', fullLabel: 'Yes, Already included Animals Australia in my will', count: 901, pct: 17.9 },
+  { label: "Don't have a will yet", fullLabel: "Don't have a will yet", count: 867, pct: 17.2 },
+  { label: 'Intend to include AA', fullLabel: 'Intend to include Animals Australia when I next revise my will', count: 546, pct: 10.8 },
 ];
 
 // Section Header Component (matching AboutYouSection format)
@@ -352,7 +361,7 @@ const YourSupportSection = () => {
             question="Q11"
             title="Would you consider becoming a monthly donor to help support future AA work?"
             subtitle="Select one"
-            respondents={5114}
+            respondents={5077}
           />
 
           {/* Top 3 Stat Cards */}
@@ -362,9 +371,9 @@ const YourSupportSection = () => {
             marginBottom: '24px',
             flexWrap: 'wrap',
           }}>
-            <StatCard value="39.1%" label="Already monthly donors" colorType="primary" />
-            <StatCard value="36.9%" label="Prefer one-off gifts" colorType="secondary" />
-            <StatCard value="20.7%" label="Not right now" colorType="accent" />
+            <StatCard value="39.4%" label="Already monthly donors" colorType="primary" />
+            <StatCard value="37.2%" label="Prefer one-off gifts" colorType="secondary" />
+            <StatCard value="20.9%" label="Not right now" colorType="accent" />
           </div>
 
           {/* Bar Chart */}
@@ -383,24 +392,84 @@ const YourSupportSection = () => {
             <strong style={{ color: COLORS.primary }}>Key insights:</strong>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Strong existing monthly donor base — 39.1% are already proud monthly donors, indicating AA has successfully converted a significant portion of supporters to recurring giving.
+              Strong existing monthly donor base — 39.4% are already proud monthly donors, indicating AA has successfully converted a significant portion of supporters to recurring giving.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              One-off giving preference is substantial — 36.9% prefer one-off gifts, suggesting many supporters value flexibility in their giving or may be on fixed incomes (consistent with the older demographic).
+              One-off giving preference is substantial — 37.2% prefer one-off gifts, suggesting many supporters value flexibility in their giving or may be on fixed incomes (consistent with the older demographic).
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Conversion opportunity is modest — only 3.2% combined are open to becoming monthly donors (1.9% ready, 1.3% want more info). The 20.7% saying "not right now" may represent future potential with the right timing or approach.
+              Conversion opportunity is modest — only 3.3% combined are open to becoming monthly donors (1.9% ready, 1.4% want more info). The 20.9% saying "not right now" may represent future potential with the right timing or approach.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Combined giving commitment is high — 76% are either already monthly donors (39.1%) or prefer one-off giving (36.9%), demonstrating strong overall financial support regardless of frequency preference.
+              Combined giving commitment is high — 76.6% are either already monthly donors (39.4%) or prefer one-off giving (37.2%), demonstrating strong overall financial support regardless of frequency preference.
             </p>
           </div>
         </div>
 
-        {/* Placeholder for Q12-Q13 */}
+        {/* Q12 - Gift in Will */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q12"
+            title="Which statement best reflects your feeling about supporting AA with a Gift in your Will?"
+            subtitle="Select one"
+            respondents={5042}
+          />
+
+          {/* Top 3 Stat Cards */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="17.9%" label="Already included AA" colorType="primary" />
+            <StatCard value="10.8%" label="Intend to include" colorType="secondary" />
+            <StatCard value="18.5%" label="Would consider" colorType="accent" />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart data={q12Data} maxValue={2100} height={220} />
+
+          {/* Key Insights */}
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Strong legacy giving pipeline — 47.2% of respondents show some level of bequest interest: 17.9% have already included AA in their will, 10.8% intend to, and 18.5% would consider it. This represents significant future fundraising potential.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Existing bequest supporters — 901 supporters have already included AA in their will. Combined with the 546 who intend to, that's 28.7% with committed or near-committed legacy intentions.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Will creation opportunity — 17.2% don't have a will yet. Given the older demographic (74.4% aged 56+), this represents both an opportunity for AA to provide estate planning resources and a pool of potential future bequest supporters.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Connects to Q10 finding — the 16 respondents who mentioned bequest/legacy giving in Q10's "Other" responses aligns with this data showing genuine supporter interest in this giving channel.
+            </p>
+          </div>
+        </div>
+
+        {/* Placeholder for Q13 */}
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
@@ -410,7 +479,7 @@ const YourSupportSection = () => {
           opacity: 0.5,
         }}>
           <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q12-Q13 sections will be added here...
+            Q13 section will be added here...
           </p>
         </div>
       </div>
