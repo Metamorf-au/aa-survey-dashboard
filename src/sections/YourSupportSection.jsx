@@ -43,15 +43,14 @@ const q10Data = [
 ];
 
 // Q10 "Other" breakdown - categorised from 234 free-text responses
+// Note: 148 responses (63%) duplicated existing options or were general statements
 const q10OtherData = [
-  { label: 'Avoid distressing content', count: 21 },
+  { label: 'Prefer to avoid distressing content', count: 21 },
   { label: 'Word of mouth & personal advocacy', count: 18 },
   { label: 'Bequest/legacy giving', count: 16 },
   { label: 'Direct political action (MPs, letters)', count: 12 },
   { label: 'Wildlife rescue/volunteering', count: 6 },
   { label: 'Feedback/suggestions', count: 5 },
-  { label: 'Duplicate of existing options', count: 94 },
-  { label: 'General support statements', count: 54 },
   { label: 'Other minor responses', count: 8 },
 ];
 
