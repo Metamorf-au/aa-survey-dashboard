@@ -352,7 +352,7 @@ const YourSupportSection = () => {
             question="Q11"
             title="Would you consider becoming a monthly donor to help support future AA work?"
             subtitle="Select one"
-            respondents={5077}
+            respondents={5114}
           />
 
           {/* Top 3 Stat Cards */}
