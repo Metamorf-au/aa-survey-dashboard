@@ -66,10 +66,10 @@ const q11Data = [
 // Q12 Data - Gift in Will consideration (sorted by count)
 const q12Data = [
   { label: 'Not at this time', fullLabel: 'Not at this time', count: 1909, pct: 37.9 },
-  { label: 'Would consider including AA', fullLabel: 'Consider including Animals Australia in my will', count: 934, pct: 18.5 },
-  { label: 'Already included AA', fullLabel: 'Yes, Already included Animals Australia in my will', count: 901, pct: 17.9 },
+  { label: 'Would consider including', fullLabel: 'Consider including Animals Australia in my will', count: 934, pct: 18.5 },
+  { label: 'Already included', fullLabel: 'Yes, Already included Animals Australia in my will', count: 901, pct: 17.9 },
   { label: "Don't have a will yet", fullLabel: "Don't have a will yet", count: 867, pct: 17.2 },
-  { label: 'Intend to include AA', fullLabel: 'Intend to include Animals Australia when I next revise my will', count: 546, pct: 10.8 },
+  { label: 'Intend to include', fullLabel: 'Intend to include Animals Australia when I next revise my will', count: 546, pct: 10.8 },
 ];
 
 // Section Header Component (matching AboutYouSection format)
@@ -431,9 +431,9 @@ const YourSupportSection = () => {
             marginBottom: '24px',
             flexWrap: 'wrap',
           }}>
-            <StatCard value="17.9%" label="Already included AA" colorType="primary" />
-            <StatCard value="10.8%" label="Intend to include" colorType="secondary" />
-            <StatCard value="18.5%" label="Would consider" colorType="accent" />
+            <StatCard value="37.9%" label="Not at this time" colorType="primary" />
+            <StatCard value="18.5%" label="Would consider" colorType="secondary" />
+            <StatCard value="17.9%" label="Already included" colorType="accent" />
           </div>
 
           {/* Bar Chart */}
