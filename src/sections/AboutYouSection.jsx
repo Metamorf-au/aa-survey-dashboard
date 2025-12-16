@@ -12,7 +12,7 @@ const COLORS = {
   accentLight: '#F4A382',
   neutral: '#64748B',
   neutralLight: '#94A3B8',
-  background: '#F8FAF9',
+  background: '#f8f3e8',
   cardBg: '#FFFFFF',
   text: '#1E293B',
   textMuted: '#64748B',
