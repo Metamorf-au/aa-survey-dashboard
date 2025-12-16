@@ -73,9 +73,10 @@ const q12Data = [
 ];
 
 // Q13 Data - Interest in bequest info (sorted by count)
+// Note: 5 invalid responses (selected both options) excluded
 const q13Data = [
-  { label: 'Not at this time', fullLabel: 'Not at this time', count: 4248, pct: 86.3 },
-  { label: 'Yes please!', fullLabel: 'Yes please!', count: 678, pct: 13.8 },
+  { label: 'Not at this time', fullLabel: 'Not at this time', count: 4243, pct: 86.3 },
+  { label: 'Yes please!', fullLabel: 'Yes please!', count: 673, pct: 13.7 },
 ];
 
 // Section Header Component (matching AboutYouSection format)
@@ -487,10 +488,10 @@ const YourSupportSection = () => {
             question="Q13"
             title="Are you interested in receiving further info about Bequests and leaving us a Gift in your Will?"
             subtitle="Select one"
-            respondents={4921}
+            respondents={4916}
           />
 
-          {/* Stat Cards - Q12 correlation breakdown of the 678 Yes responses */}
+          {/* Stat Cards - Q12 correlation breakdown of the 673 Yes responses */}
           <div style={{
             display: 'flex',
             gap: '16px',
@@ -518,19 +519,19 @@ const YourSupportSection = () => {
             <strong style={{ color: COLORS.primary }}>Key insights:</strong>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              678 supporters (13.8%) want more bequest information — a meaningful pool of warm leads for legacy giving outreach.
+              673 supporters (13.7%) want more bequest information — a meaningful pool of warm leads for legacy giving outreach.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              High-intent group identified — the 184 who both "intend to include" (Q12) and want more info (Q13) are the warmest leads, actively seeking to formalise their bequest intentions.
+              High-intent group identified — the 182 who both "intend to include" (Q12) and want more info (Q13) are the warmest leads, actively seeking to formalise their bequest intentions.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Q12 correlation reveals actionable segments — of the 678 interested: 38.3% (260) would consider including in their will, 27.1% (184) already intend to include, and 20.1% (136) don't have a will yet but want guidance.
+              Q12 correlation reveals actionable segments — of the 673 interested: 38.3% (258) would consider including in their will, 27.1% (182) already intend to include, and 20.1% (135) don't have a will yet but want guidance.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              "No will yet" represents a guided opportunity — these 136 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
+              "No will yet" represents a guided opportunity — these 135 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
             </p>
           </div>
         </div>
