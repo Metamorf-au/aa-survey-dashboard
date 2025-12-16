@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
-// Color palette - nature/animal welfare inspired (matching other sections)
+// Color palette - updated branding
 const COLORS = {
   primary: '#2D5A47',
   secondary: '#4A7C6F',
@@ -12,7 +12,7 @@ const COLORS = {
   accentLight: '#F4A382',
   neutral: '#64748B',
   neutralLight: '#94A3B8',
-  background: '#F8FAF9',
+  background: '#f8f3e8',    // Updated warm cream background
   cardBg: '#FFFFFF',
   text: '#1E293B',
   textMuted: '#64748B',
@@ -522,15 +522,15 @@ const YourSupportSection = () => {
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Q12 correlation reveals actionable segments — of the 678 interested: 38.3% (260) would consider including AA in their will, 27.1% (184) already intend to include AA, and 20.1% (136) don't have a will yet but want guidance.
+              High-intent group identified — the 184 who both "intend to include" (Q12) and want more info (Q13) are the warmest leads, actively seeking to formalise their bequest intentions.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Q12 correlation reveals actionable segments — of the 678 interested: 38.3% (260) would consider including in their will, 27.1% (184) already intend to include, and 20.1% (136) don't have a will yet but want guidance.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
               "No will yet" represents a guided opportunity — these 136 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
-            </p>
-            
-            <p style={{ margin: '12px 0 0 0' }}>
-              High-intent group identified — the 184 who both "intend to include" AA (Q12) and want more info (Q13) are the warmest leads, actively seeking to formalise their bequest intentions.
             </p>
           </div>
         </div>
