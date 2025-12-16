@@ -92,6 +92,23 @@ const q16YesData = [
   { label: 'Other suggestions', count: 236 },
 ];
 
+// Q17 Data - NPS Rating (0-10 scale, sorted descending by rating)
+// Respondents: 5,024 | Not provided: 95
+// NPS Score: 73 | Average: 9.19
+const q17Data = [
+  { label: '10', fullLabel: 'Rating 10 (Most likely)', count: 3296, pct: 65.6 },
+  { label: '9', fullLabel: 'Rating 9', count: 668, pct: 13.3 },
+  { label: '8', fullLabel: 'Rating 8', count: 551, pct: 11.0 },
+  { label: '7', fullLabel: 'Rating 7', count: 203, pct: 4.0 },
+  { label: '6', fullLabel: 'Rating 6', count: 74, pct: 1.5 },
+  { label: '5', fullLabel: 'Rating 5', count: 158, pct: 3.1 },
+  { label: '4', fullLabel: 'Rating 4', count: 14, pct: 0.3 },
+  { label: '3', fullLabel: 'Rating 3', count: 10, pct: 0.2 },
+  { label: '2', fullLabel: 'Rating 2', count: 9, pct: 0.2 },
+  { label: '1', fullLabel: 'Rating 1', count: 15, pct: 0.3 },
+  { label: '0', fullLabel: 'Rating 0 (Least likely)', count: 26, pct: 0.5 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '16px' }}>
@@ -535,6 +552,68 @@ const YourSatisfactionSection = () => {
         </div>
 
         {/* Placeholder for Q17-Q18 */}
+
+        {/* Q17 - NPS Rating */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q17"
+            title="How likely are you to recommend Animals Australia as an effective charity?"
+            subtitle="Rating scale: 0 (least likely) to 10 (most likely)"
+            respondents={5024}
+          />
+
+          {/* Top 3 Stat Cards - NPS Categories */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard
+              value="3,964"
+              label="Promoters 9-10 (78.9%)"
+              colorType="primary"
+            />
+            <StatCard
+              value="754"
+              label="Passives 7-8 (15.0%)"
+              colorType="secondary"
+            />
+            <StatCard
+              value="306"
+              label="Detractors 0-6 (6.1%)"
+              colorType="accent"
+            />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart
+            data={q17Data}
+            maxValue={3500}
+            height={440}
+          />
+
+          {/* Key Insights */}
+          <KeyInsight>
+            <p style={{ margin: '0 0 12px 0' }}>
+              With an NPS score of 73, Animals Australia achieves world-class advocacy — scores above 70 are considered exceptional and indicate extremely high supporter loyalty.
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              Nearly two-thirds (65.6%) gave the maximum rating of 10, demonstrating strong enthusiasm for recommending AA to others.
+            </p>
+            <p style={{ margin: 0 }}>
+              The average rating of 9.19 out of 10 reflects consistent satisfaction across the supporter base, with only 6.1% falling into the detractor category.
+            </p>
+          </KeyInsight>
+        </div>
+
+        {/* Placeholder for Q18 */}
 
       </div>
     </div>
