@@ -3,10 +3,16 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import AboutYouSection from './sections/AboutYouSection';
 import ValuesViewsSection from './sections/ValuesViewsSection';
 import YourSupportSection from './sections/YourSupportSection';
+import ScrollToTopBottom from './components/ScrollToTopBottom';
+import AALogo from './components/AALogo';
 
+// Updated color palette
 const COLORS = {
   primary: '#2D5A47',
-  background: '#F8FAF9',
+  navBackground: '#f1823d',      // New orange navigation background
+  navText: '#ffffff',            // White text
+  navHighlight: '#5c5c5c',       // Grey highlight color
+  background: '#f8f3e8',         // New warm cream background
   cardBg: '#FFFFFF',
   text: '#1E293B',
   textMuted: '#64748B',
@@ -57,7 +63,7 @@ const YourSatisfaction = () => (
   />
 );
 
-// Navigation component
+// Navigation component with new styling
 const Navigation = () => {
   const navItems = [
     { path: '/', label: 'Overview' },
@@ -69,34 +75,40 @@ const Navigation = () => {
 
   return (
     <nav style={{
-      background: COLORS.primary,
-      padding: '16px 32px',
+      background: COLORS.navBackground,
+      padding: '12px 32px',
       display: 'flex',
       alignItems: 'center',
       gap: '8px',
       flexWrap: 'wrap',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100,
+      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     }}>
+      {/* Logo replacing "AA Survey Dashboard" text */}
       <div style={{
-        color: 'white',
-        fontSize: '18px',
-        fontWeight: 700,
         marginRight: '32px',
+        display: 'flex',
+        alignItems: 'center',
       }}>
-        AA Survey Dashboard
+        <AALogo height={44} />
       </div>
+      
+      {/* Navigation links */}
       {navItems.map(item => (
         <NavLink
           key={item.path}
           to={item.path}
           style={({ isActive }) => ({
             textDecoration: 'none',
-            padding: '12px 20px',
+            padding: '10px 18px',
             borderRadius: '8px',
             fontSize: '14px',
             fontWeight: 500,
             transition: 'all 0.2s ease',
-            background: isActive ? 'rgba(255,255,255,0.2)' : 'transparent',
-            color: isActive ? 'white' : 'rgba(255,255,255,0.8)',
+            background: isActive ? COLORS.navHighlight : 'transparent',
+            color: COLORS.navText,
           })}
         >
           {item.label}
@@ -118,6 +130,8 @@ function App() {
           <Route path="/your-support" element={<YourSupportSection />} />
           <Route path="/satisfaction" element={<YourSatisfaction />} />
         </Routes>
+        {/* Floating scroll arrows */}
+        <ScrollToTopBottom />
       </div>
     </Router>
   );
