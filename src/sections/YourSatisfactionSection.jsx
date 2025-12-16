@@ -164,7 +164,7 @@ const KeyInsight = ({ children }) => (
     borderRadius: '8px',
     borderLeft: '3px solid ' + COLORS.accent,
   }}>
-    <span style={{ color: COLORS.primary }}>Key Insights:</span>
+    <strong style={{ color: COLORS.primary }}>Key Insights:</strong>
     <div style={{ marginTop: '8px', lineHeight: '1.6' }}>{children}</div>
   </div>
 );
