@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import AboutYouSection from './sections/AboutYouSection';
 import ValuesViewsSection from './sections/ValuesViewsSection';
 import YourSupportSection from './sections/YourSupportSection';
+import YourSatisfactionSection from './sections/YourSatisfactionSection';
 import ScrollToTopBottom from './components/ScrollToTopBottom';
 import AALogo from './components/AALogo';
 
@@ -53,13 +54,6 @@ const Overview = () => (
   <PlaceholderSection 
     title="Overview" 
     questions="Executive summary and key findings across all sections"
-  />
-);
-
-const YourSatisfaction = () => (
-  <PlaceholderSection 
-    title="Your Satisfaction" 
-    questions="Questions 14-18"
   />
 );
 
@@ -128,7 +122,7 @@ function App() {
           <Route path="/about-you" element={<AboutYouSection />} />
           <Route path="/values-views" element={<ValuesViewsSection />} />
           <Route path="/your-support" element={<YourSupportSection />} />
-          <Route path="/satisfaction" element={<YourSatisfaction />} />
+          <Route path="/satisfaction" element={<YourSatisfactionSection />} />
         </Routes>
         {/* Floating scroll arrows */}
         <ScrollToTopBottom />
