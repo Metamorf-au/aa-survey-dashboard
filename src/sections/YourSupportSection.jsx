@@ -72,6 +72,12 @@ const q12Data = [
   { label: 'Intend to include', fullLabel: 'Intend to include Animals Australia when I next revise my will', count: 546, pct: 10.8 },
 ];
 
+// Q13 Data - Interest in bequest info (sorted by count)
+const q13Data = [
+  { label: 'Not at this time', fullLabel: 'Not at this time', count: 4248, pct: 86.3 },
+  { label: 'Yes please!', fullLabel: 'Yes please!', count: 678, pct: 13.8 },
+];
+
 // Section Header Component (matching AboutYouSection format)
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '20px' }}>
@@ -469,18 +475,64 @@ const YourSupportSection = () => {
           </div>
         </div>
 
-        {/* Placeholder for Q13 */}
+        {/* Q13 - Interest in Bequest Info */}
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           border: '1px solid ' + COLORS.quinary,
-          opacity: 0.5,
         }}>
-          <p style={{ margin: 0, fontSize: '14px', color: COLORS.textMuted, textAlign: 'center' }}>
-            Q13 section will be added here...
-          </p>
+          <SectionHeader
+            question="Q13"
+            title="Are you interested in receiving further info about Bequests and leaving us a Gift in your Will?"
+            subtitle="Select one"
+            respondents={4921}
+          />
+
+          {/* Stat Cards - Q12 correlation breakdown of the 678 Yes responses */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard value="38.3%" label="Would consider (Q12)" colorType="primary" />
+            <StatCard value="27.1%" label="Intend to include (Q12)" colorType="secondary" />
+            <StatCard value="20.1%" label="No will yet (Q12)" colorType="accent" />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart data={q13Data} maxValue={4500} height={120} />
+
+          {/* Key Insights */}
+          <div style={{
+            fontSize: '13px',
+            color: COLORS.textMuted,
+            marginTop: '16px',
+            padding: '12px',
+            background: COLORS.background,
+            borderRadius: '8px',
+            borderLeft: '3px solid ' + COLORS.accent,
+          }}>
+            <strong style={{ color: COLORS.primary }}>Key insights:</strong>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              678 supporters (13.8%) want more bequest information — a meaningful pool of warm leads for legacy giving outreach.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              Q12 correlation reveals actionable segments — of the 678 interested: 38.3% (260) would consider including AA in their will, 27.1% (184) already intend to include AA, and 20.1% (136) don't have a will yet but want guidance.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              "No will yet" represents a guided opportunity — these 136 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
+            </p>
+            
+            <p style={{ margin: '12px 0 0 0' }}>
+              High-intent group identified — the 184 who both "intend to include" AA (Q12) and want more info (Q13) are the warmest leads, actively seeking to formalise their bequest intentions.
+            </p>
+          </div>
         </div>
       </div>
     </div>
