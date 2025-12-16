@@ -68,6 +68,30 @@ const q15OtherData = [
   { label: 'Other minor responses', count: 151 },
 ];
 
+// Q16 Data - Improve supporter experience (sorted by count descending)
+// Total survey: 5,119 | Answered: 4,954 | Yes adjusted from free-text count (692)
+const q16Data = [
+  { label: 'No, I\'m happy', fullLabel: 'No, I\'m happy', count: 4262, pct: 83.3 },
+  { label: 'Yes, I think', fullLabel: 'Yes, I think', count: 692, pct: 13.5 },
+  { label: 'Not provided', fullLabel: 'Not provided', count: 165, pct: 3.2 },
+];
+
+// Q16 "Yes" breakdown data (sorted by count descending, Other last)
+const q16YesData = [
+  { label: 'Reduce/stop postal mail', count: 146 },
+  { label: 'Praise / doing great work', count: 91 },
+  { label: 'More advertising / media exposure', count: 82 },
+  { label: 'Tax deductibility / DGR status', count: 26 },
+  { label: 'More events / regional presence', count: 22 },
+  { label: 'More volunteer opportunities', count: 21 },
+  { label: 'More transparency / impact reporting', count: 19 },
+  { label: 'School / youth education', count: 17 },
+  { label: 'Wildlife / native animals focus', count: 12 },
+  { label: 'Content warnings / less graphic imagery', count: 11 },
+  { label: 'Partner with other organisations', count: 7 },
+  { label: 'Other suggestions', count: 236 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '16px' }}>
@@ -270,6 +294,7 @@ const ExpandableBreakdown = ({ title, total, data, show, onToggle, insight }) =>
 // Main Component
 const YourSatisfactionSection = () => {
   const [showQ15Other, setShowQ15Other] = useState(false);
+  const [showQ16Yes, setShowQ16Yes] = useState(false);
 
   return (
     <div style={{
@@ -439,7 +464,77 @@ const YourSatisfactionSection = () => {
           </KeyInsight>
         </div>
 
-        {/* Placeholder for Q16-Q18 */}
+        {/* Q16 - Improve supporter experience */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q16"
+            title="Are there any ways we could improve your experience as a supporter?"
+            subtitle="Single select with optional suggestions"
+            respondents={5119}
+          />
+
+          {/* Top 3 Stat Cards */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard
+              value="4,262"
+              label="No, I'm happy (83.3%)"
+              colorType="primary"
+            />
+            <StatCard
+              value="692"
+              label="Yes, I think (13.5%)"
+              colorType="secondary"
+            />
+            <StatCard
+              value="165"
+              label="Not provided (3.2%)"
+              colorType="accent"
+            />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart
+            data={q16Data}
+            maxValue={4500}
+            height={160}
+          />
+
+          {/* Yes Breakdown */}
+          <ExpandableBreakdown
+            title='"Yes" Breakdown'
+            total={692}
+            data={q16YesData}
+            show={showQ16Yes}
+            onToggle={() => setShowQ16Yes(!showQ16Yes)}
+            insight="Reducing postal mail emerged as the dominant suggestion (146 responses), with supporters preferring digital communication and funds directed to animal welfare work. Tax deductibility/DGR status (26) remains a recurring request. Notably, 91 respondents used the 'Yes' field to express praise rather than critique, reflecting high overall satisfaction even among those with suggestions."
+          />
+
+          {/* Key Insights */}
+          <KeyInsight>
+            <p style={{ margin: '0 0 12px 0' }}>
+              83.3% of supporters (4,262) are happy with their experience — a strong endorsement of current engagement practices.
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              Among the 13.5% with suggestions, reducing postal mail (146) was the most common theme, reflecting a preference for digital communication and cost-conscious stewardship.
+            </p>
+            <p style={{ margin: 0 }}>
+              The low "Not provided" rate (3.2%) indicates high engagement with the survey, with most respondents willing to share feedback.
+            </p>
+          </KeyInsight>
+        </div>
+
+        {/* Placeholder for Q17-Q18 */}
 
       </div>
     </div>
