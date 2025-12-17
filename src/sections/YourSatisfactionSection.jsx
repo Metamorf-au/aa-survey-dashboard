@@ -715,7 +715,7 @@ const YourSatisfactionSection = () => {
               }}>
                 ▶
               </span>
-              {showQ18Other ? 'Hide' : 'Show'} "Other" Breakdown (406 responses)
+              {showQ18Other} "Other" Breakdown (406 responses)
             </button>
 
             {showQ18Other && (
