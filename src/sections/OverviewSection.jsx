@@ -58,8 +58,6 @@ const PillarCard = ({ title, subtitle, path, highlights, accentColor }) => {
         borderTop: '4px solid ' + accentColor,
         cursor: 'pointer',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        flex: '1',
-        minWidth: '260px',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-4px)';
@@ -151,7 +149,7 @@ const OverviewSection = () => {
         <div style={{
           background: COLORS.cardBg,
           borderRadius: '16px',
-          padding: '32px',
+          padding: '20px 32px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           border: '1px solid ' + COLORS.quinary,
           textAlign: 'center',
@@ -162,12 +160,12 @@ const OverviewSection = () => {
             color: COLORS.textMuted,
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
-            marginBottom: '8px',
+            marginBottom: '4px',
           }}>
             Total Survey Respondents
           </div>
           <div style={{
-            fontSize: '64px',
+            fontSize: '52px',
             fontWeight: 700,
             color: COLORS.primary,
             lineHeight: 1,
@@ -180,7 +178,7 @@ const OverviewSection = () => {
             display: 'flex',
             justifyContent: 'center',
             gap: '32px',
-            marginTop: '20px',
+            marginTop: '12px',
             flexWrap: 'wrap',
           }}>
             <div style={{ textAlign: 'center' }}>
@@ -233,11 +231,11 @@ const OverviewSection = () => {
           </div>
         </div>
 
-        {/* Four Pillars Section */}
+        {/* Four Pillars Section - 2x2 Grid */}
         <div style={{
-          display: 'flex',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
           gap: '20px',
-          flexWrap: 'wrap',
         }}>
           <PillarCard
             title="Who are our supporters?"
