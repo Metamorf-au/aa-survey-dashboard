@@ -227,7 +227,7 @@ const OverviewSection = () => {
             <StatCard value="77.1%" label="Email subscribers" colorType="accent" />
             <StatCard value="39.4%" label="Monthly donors" colorType="primary" />
             <StatCard value="94.6%" label="Trust Stewardship" colorType="secondary" />
-            <StatCard value="74" label="High Loyalty Score" colorType="accent" />
+            <StatCard value="74%" label="High Loyalty Score" colorType="accent" />
           </div>
         </div>
 
