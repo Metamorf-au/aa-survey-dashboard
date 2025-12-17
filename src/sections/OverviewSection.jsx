@@ -207,10 +207,10 @@ const OverviewSection = () => {
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           border: '1px solid ' + COLORS.quinary,
         }}>
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '16px', textAlign: 'center' }}>
             <h3 style={{
               fontSize: '18px',
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.text,
               margin: 0,
             }}>
@@ -221,6 +221,7 @@ const OverviewSection = () => {
             display: 'flex',
             gap: '16px',
             flexWrap: 'wrap',
+            justifyContent: 'center',
           }}>
             <StatCard value="74.4%" label="Aged 56 or older" colorType="primary" />
             <StatCard value="65.9%" label="Inspired by Results" colorType="secondary" />
