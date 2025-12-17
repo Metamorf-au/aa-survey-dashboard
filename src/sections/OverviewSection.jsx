@@ -231,6 +231,76 @@ const OverviewSection = () => {
           </div>
         </div>
 
+        {/* Key Opportunities Section */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <div style={{ marginBottom: '16px', textAlign: 'center' }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: 700,
+              color: COLORS.text,
+              margin: 0,
+            }}>
+              Key Opportunities
+            </h3>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '16px',
+          }}>
+            {/* Opportunity 1 - Bequest */}
+            <div style={{
+              background: COLORS.background,
+              borderRadius: '12px',
+              padding: '20px',
+              borderLeft: '4px solid ' + COLORS.primary,
+            }}>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: COLORS.primary }}>31.3%</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>Considering bequest</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Legacy giving potential</div>
+            </div>
+            {/* Opportunity 2 - Education */}
+            <div style={{
+              background: COLORS.background,
+              borderRadius: '12px',
+              padding: '20px',
+              borderLeft: '4px solid #1E7B8C',
+            }}>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: '#1E7B8C' }}>47.4%</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>Hen lifespan awareness</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Fill education gaps</div>
+            </div>
+            {/* Opportunity 3 - Schools */}
+            <div style={{
+              background: COLORS.background,
+              borderRadius: '12px',
+              padding: '20px',
+              borderLeft: '4px solid ' + COLORS.accent,
+            }}>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: COLORS.accent }}>33</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>School/Youth programs</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Engage school-aged kids</div>
+            </div>
+            {/* Opportunity 4 - Digital */}
+            <div style={{
+              background: COLORS.background,
+              borderRadius: '12px',
+              padding: '20px',
+              borderLeft: '4px solid #8B5CF6',
+            }}>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: '#8B5CF6' }}>7.3%</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>Digital channel growth</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Increase online content</div>
+            </div>
+          </div>
+        </div>
+
         {/* Four Pillars Section - 2x2 Grid */}
         <div style={{
           display: 'grid',
