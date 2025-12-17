@@ -279,6 +279,7 @@ const StatCard = ({ value, label, colorType }) => {
 
 // Main Component
 const ValuesViewsSection = () => {
+  const [showQ4Other, setShowQ4Other] = useState(false);
   const [showQ6Other, setShowQ6Other] = useState(false);
   const [showQ9DocBook, setShowQ9DocBook] = useState(false);
   const [showQ9Other, setShowQ9Other] = useState(false);
