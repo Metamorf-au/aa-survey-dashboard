@@ -4,6 +4,7 @@ import AboutYouSection from './sections/AboutYouSection';
 import ValuesViewsSection from './sections/ValuesViewsSection';
 import YourSupportSection from './sections/YourSupportSection';
 import YourSatisfactionSection from './sections/YourSatisfactionSection';
+import OverviewSection from './sections/OverviewSection';
 import ScrollToTopBottom from './components/ScrollToTopBottom';
 import AALogo from './components/AALogo';
 
@@ -19,43 +20,6 @@ const COLORS = {
   textMuted: '#64748B',
   quinary: '#B3D9C9',
 };
-
-// Placeholder components for sections not yet built
-const PlaceholderSection = ({ title, questions }) => (
-  <div style={{
-    fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-    background: COLORS.background,
-    minHeight: '100vh',
-    padding: '32px',
-  }}>
-    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '28px', fontWeight: 700, color: COLORS.text, margin: 0 }}>
-        {title}
-      </h1>
-      <p style={{ fontSize: '15px', color: COLORS.textMuted, margin: '8px 0 24px' }}>
-        {questions}
-      </p>
-      <div style={{
-        background: COLORS.cardBg,
-        borderRadius: '16px',
-        padding: '48px',
-        textAlign: 'center',
-        border: '1px solid ' + COLORS.quinary,
-      }}>
-        <p style={{ fontSize: '18px', color: COLORS.textMuted }}>
-          🚧 Coming Soon
-        </p>
-      </div>
-    </div>
-  </div>
-);
-
-const Overview = () => (
-  <PlaceholderSection 
-    title="Overview" 
-    questions="Executive summary and key findings across all sections"
-  />
-);
 
 // Navigation component with new styling
 const Navigation = () => {
@@ -118,7 +82,7 @@ function App() {
       <div style={{ minHeight: '100vh', background: COLORS.background }}>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Overview />} />
+          <Route path="/" element={<OverviewSection />} />
           <Route path="/about-you" element={<AboutYouSection />} />
           <Route path="/values-views" element={<ValuesViewsSection />} />
           <Route path="/your-support" element={<YourSupportSection />} />
