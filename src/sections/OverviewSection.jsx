@@ -283,7 +283,7 @@ const OverviewSection = () => {
               padding: '20px',
               borderLeft: '4px solid ' + COLORS.accent,
             }}>
-              <div style={{ fontSize: '28px', fontWeight: 700, color: COLORS.accent }}>33</div>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: COLORS.accent }}>33%</div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>School/Youth programs</div>
               <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Engage school-aged kids</div>
             </div>
