@@ -251,7 +251,7 @@ const OverviewSection = () => {
           </div>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: '16px',
           }}>
             {/* Opportunity 1 - Bequest */}
@@ -304,7 +304,7 @@ const OverviewSection = () => {
         {/* Four Pillars Section - 2x2 Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: '20px',
         }}>
           <PillarCard
