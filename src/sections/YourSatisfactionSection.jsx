@@ -109,6 +109,24 @@ const q17Data = [
   { label: '0', fullLabel: 'Rating 0 (Least likely)', count: 26, pct: 0.5 },
 ];
 
+// Q18 Data - "I support Animals Australia because..." (free-text themes)
+// Respondents: 4,924
+const q18Data = [
+  { label: 'Animal welfare / ending cruelty', fullLabel: 'Animal welfare / ending cruelty', count: 1885, pct: 38.3 },
+  { label: 'Voice for the voiceless', fullLabel: 'Animals deserve better / voice for voiceless', count: 898, pct: 18.2 },
+  { label: 'Making a difference', fullLabel: 'Making a difference / hope for change', count: 631, pct: 12.8 },
+  { label: 'Love / care for animals', fullLabel: 'Love / care for animals', count: 446, pct: 9.1 },
+  { label: 'Trust in AA', fullLabel: 'Trust in AA / effective organisation', count: 301, pct: 6.1 },
+  { label: 'Ethical / moral beliefs', fullLabel: 'Ethical / moral beliefs', count: 141, pct: 2.9 },
+  { label: 'Investigations & awareness', fullLabel: 'Investigations & awareness campaigns', count: 76, pct: 1.5 },
+  { label: 'All animals matter', fullLabel: 'All animals matter equally', count: 58, pct: 1.2 },
+  { label: 'Acts on my behalf', fullLabel: 'Personal motivation / acting on my behalf', count: 35, pct: 0.7 },
+  { label: 'Live export & factory farming', fullLabel: 'Live export & factory farming', count: 26, pct: 0.5 },
+  { label: 'Environment & wildlife', fullLabel: 'Environment & wildlife', count: 12, pct: 0.2 },
+  { label: 'Vegan / plant-based', fullLabel: 'Vegan / plant-based lifestyle', count: 9, pct: 0.2 },
+  { label: 'Other responses', fullLabel: 'Other responses', count: 406, pct: 8.2 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '16px' }}>
@@ -613,7 +631,68 @@ const YourSatisfactionSection = () => {
           </KeyInsight>
         </div>
 
-        {/* Placeholder for Q18 */}
+        {/* Q18 - I support Animals Australia because... */}
+        <div style={{
+          background: COLORS.cardBg,
+          borderRadius: '16px',
+          padding: '24px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          border: '1px solid ' + COLORS.quinary,
+        }}>
+          <SectionHeader
+            question="Q18"
+            title='"I support Animals Australia because..."'
+            subtitle="Free-text responses categorised into themes"
+            respondents={4924}
+          />
+
+          {/* Top 3 Stat Cards */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            marginBottom: '24px',
+            flexWrap: 'wrap',
+          }}>
+            <StatCard
+              value="1,885"
+              label="Animal welfare / ending cruelty (38.3%)"
+              colorType="primary"
+            />
+            <StatCard
+              value="898"
+              label="Voice for the voiceless (18.2%)"
+              colorType="secondary"
+            />
+            <StatCard
+              value="631"
+              label="Making a difference (12.8%)"
+              colorType="accent"
+            />
+          </div>
+
+          {/* Bar Chart */}
+          <HorizontalBarChart
+            data={q18Data}
+            maxValue={2000}
+            height={520}
+          />
+
+          {/* Key Insights */}
+          <KeyInsight>
+            <p style={{ margin: '0 0 12px 0' }}>
+              Ending cruelty and reducing animal suffering is the primary driver of support (38.3%), followed closely by giving animals a voice (18.2%). The combination of these two themes — stopping harm and advocating for the voiceless — accounts for over half of all responses.
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              A notable theme is supporters feeling AA "does what I cannot" — many cite the emotional toll of witnessing cruelty and express gratitude that investigators bear this burden on their behalf. The courage and bravery of investigators featured prominently (235 mentions).
+            </p>
+            <p style={{ margin: '0 0 12px 0' }}>
+              Lyn White is mentioned by name 60 times, with many crediting her as the reason they first supported AA. Several supporters shared that AA campaigns directly changed their behaviour, including becoming vegan after the 2011 live export exposé.
+            </p>
+            <p style={{ margin: 0 }}>
+              Gratitude (343 mentions) and hope (252 mentions) are stronger emotional drivers than anger or sadness, suggesting supporters are motivated by positive belief in change rather than outrage alone. Notably, 135 respondents describe AA as "the only organisation" doing this work effectively.
+            </p>
+          </KeyInsight>
+        </div>
 
       </div>
     </div>
