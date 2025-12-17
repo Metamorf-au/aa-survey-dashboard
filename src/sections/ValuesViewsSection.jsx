@@ -37,6 +37,17 @@ const q4Data = [
   { label: 'Fish farm cruelty', fullLabel: 'Exposing and ending cruelty on industrial fish farms, such as salmon farms', count: 242, pct: 4.7 },
 ];
 
+// Q4 Other breakdown data (results from online survey)
+const q4OtherData = [
+  { label: "All of the above / couldn't choose 3 only", count: 88 },
+  { label: 'End animal testing/experimentation', count: 22 },
+  { label: 'Stronger laws/penalties', count: 10 },
+  { label: 'Brumbies/wild horses', count: 6 },
+  { label: 'Puppy farms/dog breeding', count: 5 },
+  { label: 'Unable to donate (financial)', count: 5 },
+  { label: 'Other minor responses', count: 75 },
+];
+
 // Q5 Data - What inspires you to support AA (sorted by count descending)
 const q5Data = [
   { label: 'Achieving results', fullLabel: 'They are committed to achieving results for animals', count: 3375, pct: 65.9 },
@@ -329,6 +340,58 @@ const ValuesViewsSection = () => {
           </div>
 
           <HorizontalBarChart data={q4Data} maxValue={3800} height={420} />
+
+          {/* Other Breakdown Toggle */}
+          <div style={{ marginTop: '16px' }}>
+            <button
+              onClick={() => setShowQ4Other(!showQ4Other)}
+              style={{
+                padding: '8px 16px',
+                background: 'transparent',
+                border: '1px solid ' + COLORS.tertiary,
+                borderRadius: '6px',
+                fontSize: '13px',
+                color: COLORS.secondary,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {showQ4Other ? '▼' : '▶'} "Other" Breakdown (211 responses from online survey)
+            </button>
+            
+            {showQ4Other && (
+              <div style={{
+                marginTop: '12px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+              }}>
+                {q4OtherData.map((item, index) => (
+                  <div key={item.label} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: index < q4OtherData.length - 1 ? '1px solid ' + COLORS.quinary : 'none',
+                  }}>
+                    <span style={{ fontSize: '13px', color: COLORS.text }}>{item.label}</span>
+                    <span style={{ fontSize: '13px', color: COLORS.textMuted }}>{item.count}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  margin: '12px 0 0',
+                  padding: '12px',
+                  background: COLORS.cardBg,
+                  borderRadius: '8px',
+                }}>
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> The dominant "Other" response (88, 41.7%) was frustration at being limited to 3 choices — respondents wanted to support ALL causes. Animal testing/experimentation (22) emerged as a notable cause not in the original options.
+                </p>
+              </div>
+            )}
+          </div>
 
           <div style={{
             fontSize: '13px',
