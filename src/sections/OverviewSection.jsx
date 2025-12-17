@@ -149,7 +149,7 @@ const OverviewSection = () => {
           fontWeight: '700',
           color: COLORS.primary,
         }}>
-          2024 Supporter Survey Results
+          2025 Supporter Survey Results
         </h2>
         <p style={{ margin: 0, fontSize: '15px', color: COLORS.textMuted }}>
           Executive summary and key findings across 18 questions
@@ -197,37 +197,22 @@ const OverviewSection = () => {
           <div style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '24px',
+            gap: '32px',
             marginTop: '20px',
             flexWrap: 'wrap',
           }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '12px 20px',
-              background: COLORS.quinary,
-              borderRadius: '8px',
-            }}>
-              <span style={{ fontSize: '20px' }}>💻</span>
-              <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '18px', fontWeight: 700, color: COLORS.primary }}>2,779</div>
-                <div style={{ fontSize: '12px', color: COLORS.textMuted }}>Online (54.3%)</div>
-              </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '24px', fontWeight: 700, color: COLORS.primary }}>2,779</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted }}>Online (54.3%)</div>
             </div>
             <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '12px 20px',
+              width: '1px',
               background: COLORS.quinary,
-              borderRadius: '8px',
-            }}>
-              <span style={{ fontSize: '20px' }}>📮</span>
-              <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '18px', fontWeight: 700, color: COLORS.primary }}>2,340</div>
-                <div style={{ fontSize: '12px', color: COLORS.textMuted }}>Printed (45.7%)</div>
-              </div>
+              alignSelf: 'stretch',
+            }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '24px', fontWeight: 700, color: COLORS.primary }}>2,340</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted }}>Printed (45.7%)</div>
             </div>
           </div>
         </div>
@@ -255,12 +240,13 @@ const OverviewSection = () => {
             gap: '16px',
             flexWrap: 'wrap',
           }}>
-            <StatCard value="74" label="Net Promoter Score" colorType="primary" />
-            <StatCard value="94.6%" label="Trust donations used well" colorType="secondary" />
+            <StatCard value="74.4%" label="Aged 56 or older" colorType="primary" />
+            <StatCard value="65.9%" label="Inspired by achieving results" colorType="secondary" />
             <StatCard value="41%" label="Vegan or vegetarian" colorType="accent" />
-            <StatCard value="77.1%" label="Email subscribers" colorType="primary" />
-            <StatCard value="68.1%" label="Take actions/petitions" colorType="secondary" />
-            <StatCard value="74.4%" label="Aged 56 or older" colorType="accent" />
+            <StatCard value="77.1%" label="Email subscribers" colorType="accent" />
+            <StatCard value="39.4%" label="Considering monthly giving" colorType="primary" />
+            <StatCard value="94.6%" label="Trust donations used well" colorType="secondary" />
+            <StatCard value="74" label="Net Promoter Score (Loyalty)" colorType="accent" />
           </div>
         </div>
 
