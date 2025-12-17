@@ -127,6 +127,18 @@ const q18Data = [
   { label: 'Other responses', fullLabel: 'Other responses', count: 406, pct: 8.2 },
 ];
 
+// Q18 "Other" breakdown data (sorted by count descending)
+const q18OtherData = [
+  { label: 'Miscellaneous responses', count: 167 },
+  { label: 'Simple/short affirmations', count: 115 },
+  { label: 'Fighting for / supporting animals', count: 62 },
+  { label: 'General praise & approval', count: 28 },
+  { label: 'Action-oriented / gets results', count: 13 },
+  { label: 'AA is unique / only one doing this', count: 9 },
+  { label: 'Animals need us / our responsibility', count: 8 },
+  { label: 'Philosophical / animals\' inherent rights', count: 4 },
+];
+
 // Section Header Component
 const SectionHeader = ({ question, title, subtitle, respondents }) => (
   <div style={{ marginBottom: '16px' }}>
@@ -330,6 +342,7 @@ const ExpandableBreakdown = ({ title, total, data, show, onToggle, insight }) =>
 const YourSatisfactionSection = () => {
   const [showQ15Other, setShowQ15Other] = useState(false);
   const [showQ16Yes, setShowQ16Yes] = useState(false);
+  const [showQ18Other, setShowQ18Other] = useState(false);
 
   return (
     <div style={{
@@ -676,6 +689,85 @@ const YourSatisfactionSection = () => {
             maxValue={2000}
             height={520}
           />
+
+          {/* Expandable "Other" Breakdown */}
+          <div style={{ marginTop: '16px', marginBottom: '16px' }}>
+            <button
+              onClick={() => setShowQ18Other(!showQ18Other)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'none',
+                border: `1px solid ${COLORS.quinary}`,
+                borderRadius: '8px',
+                padding: '10px 16px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: COLORS.primary,
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <span style={{
+                transform: showQ18Other ? 'rotate(90deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+              }}>
+                ▶
+              </span>
+              {showQ18Other ? 'Hide' : 'Show'} "Other" Breakdown (406 responses)
+            </button>
+
+            {showQ18Other && (
+              <div style={{
+                marginTop: '16px',
+                padding: '16px',
+                background: COLORS.background,
+                borderRadius: '8px',
+                border: `1px solid ${COLORS.quinary}`,
+              }}>
+                <p style={{
+                  margin: '0 0 12px 0',
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                }}>
+                  Breakdown of 406 responses that didn't match primary theme keywords:
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {q18OtherData.map((item, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '8px 12px',
+                        background: 'white',
+                        borderRadius: '6px',
+                        fontSize: '14px',
+                      }}
+                    >
+                      <span style={{ color: COLORS.text }}>{item.label}</span>
+                      <span style={{
+                        fontWeight: '600',
+                        color: COLORS.primary,
+                      }}>
+                        {item.count}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p style={{
+                  margin: '12px 0 0 0',
+                  fontSize: '13px',
+                  color: COLORS.textMuted,
+                  fontStyle: 'italic',
+                }}>
+                  <strong>Note:</strong> The "Other" category primarily contains brief affirmations (e.g., "they care", "good cause") and variations of the main themes that didn't match specific keywords. No significant new themes emerged from this group.
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Key Insights */}
           <KeyInsight>
