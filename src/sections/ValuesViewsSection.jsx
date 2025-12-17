@@ -343,8 +343,8 @@ const ValuesViewsSection = () => {
 
           {/* Other Breakdown Toggle */}
           <div style={{ marginTop: '16px' }}>
-            <button
-              onClick={() => setShowQ4Other(!showQ4Other)}
+            <button 
+            onClick={() => setShowQ4Other(!showQ4Other)}
               style={{
                 padding: '8px 16px',
                 background: 'transparent',
