@@ -92,9 +92,9 @@ const q16YesData = [
   { label: 'Other suggestions', count: 236 },
 ];
 
-// Q17 Data - NPS Rating (0-10 scale, sorted descending by rating)
+// Q17 Data - Net Promoter Score Rating (0-10 scale, sorted descending by rating)
 // Respondents: 5,024 | Not provided: 95
-// NPS Score: 73 | Average: 9.19
+// NPS Categories: Promoters (9-10), Passives (6-8), Detractors (0-5)
 const q17Data = [
   { label: '10', fullLabel: 'Rating 10 (Most likely)', count: 3296, pct: 65.6 },
   { label: '9', fullLabel: 'Rating 9', count: 668, pct: 13.3 },
@@ -568,7 +568,7 @@ const YourSatisfactionSection = () => {
             respondents={5024}
           />
 
-          {/* Top 3 Stat Cards - NPS Categories */}
+          {/* Top 3 Stat Cards - Net Promoter Score Categories */}
           <div style={{
             display: 'flex',
             gap: '16px',
@@ -581,13 +581,13 @@ const YourSatisfactionSection = () => {
               colorType="primary"
             />
             <StatCard
-              value="754"
-              label="Passives 7-8 (15.0%)"
+              value="828"
+              label="Passives 6-8 (16.5%)"
               colorType="secondary"
             />
             <StatCard
-              value="306"
-              label="Detractors 0-6 (6.1%)"
+              value="232"
+              label="Detractors 0-5 (4.6%)"
               colorType="accent"
             />
           </div>
@@ -602,13 +602,13 @@ const YourSatisfactionSection = () => {
           {/* Key Insights */}
           <KeyInsight>
             <p style={{ margin: '0 0 12px 0' }}>
-              With an NPS score of 73, Animals Australia achieves world-class advocacy — scores above 70 are considered exceptional and indicate extremely high supporter loyalty.
+              With a Net Promoter Score of 74, Animals Australia achieves world-class advocacy — scores above 70 are considered exceptional and indicate extremely high supporter loyalty.
             </p>
             <p style={{ margin: '0 0 12px 0' }}>
               Nearly two-thirds (65.6%) gave the maximum rating of 10, demonstrating strong enthusiasm for recommending AA to others.
             </p>
             <p style={{ margin: 0 }}>
-              The average rating of 9.19 out of 10 reflects consistent satisfaction across the supporter base, with only 6.1% falling into the detractor category.
+              The average rating of 9.19 out of 10 reflects consistent satisfaction across the supporter base, with only 4.6% falling into the detractor (0 to 5 rating) category.
             </p>
           </KeyInsight>
         </div>
