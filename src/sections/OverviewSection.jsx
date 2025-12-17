@@ -138,24 +138,6 @@ const OverviewSection = () => {
       minHeight: '100vh',
       padding: '32px',
     }}>
-      {/* Page Header */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto 32px',
-      }}>
-        <h2 style={{
-          margin: '0 0 8px 0',
-          fontSize: '28px',
-          fontWeight: '700',
-          color: COLORS.primary,
-        }}>
-          2025 Supporter Survey Results
-        </h2>
-        <p style={{ margin: 0, fontSize: '15px', color: COLORS.textMuted }}>
-          Executive summary and key findings across 18 questions
-        </p>
-      </div>
-
       {/* Main Content */}
       <div style={{
         maxWidth: '1200px',
@@ -241,12 +223,12 @@ const OverviewSection = () => {
             flexWrap: 'wrap',
           }}>
             <StatCard value="74.4%" label="Aged 56 or older" colorType="primary" />
-            <StatCard value="65.9%" label="Inspired by achieving results" colorType="secondary" />
-            <StatCard value="41%" label="Vegan or vegetarian" colorType="accent" />
+            <StatCard value="65.9%" label="Inspired by Results" colorType="secondary" />
+            <StatCard value="41%" label="Vegan/vegetarian" colorType="accent" />
             <StatCard value="77.1%" label="Email subscribers" colorType="accent" />
-            <StatCard value="39.4%" label="Considering monthly giving" colorType="primary" />
-            <StatCard value="94.6%" label="Trust donations used well" colorType="secondary" />
-            <StatCard value="74" label="Net Promoter Score (Loyalty)" colorType="accent" />
+            <StatCard value="39.4%" label="Monthly donors" colorType="primary" />
+            <StatCard value="94.6%" label="Trust Stewardship" colorType="secondary" />
+            <StatCard value="74" label="High Loyalty Score" colorType="accent" />
           </div>
         </div>
 
@@ -300,38 +282,6 @@ const OverviewSection = () => {
               "82.4% want more factory farm exposés",
             ]}
           />
-        </div>
-
-        {/* Cross-cutting Insights */}
-        <div style={{
-          background: COLORS.cardBg,
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          border: '1px solid ' + COLORS.quinary,
-        }}>
-          <div style={{
-            fontSize: '13px',
-            color: COLORS.textMuted,
-            padding: '12px',
-            background: COLORS.background,
-            borderRadius: '8px',
-            borderLeft: '3px solid ' + COLORS.accent,
-          }}>
-            <strong style={{ color: COLORS.primary }}>Cross-cutting insights:</strong>
-            
-            <p style={{ margin: '12px 0 0 0' }}>
-              <strong>Channel alignment:</strong> The high printed survey response (45.7%) directly reflects the mature demographic — postal communications remain highly effective for the 74.4% of supporters aged 56+.
-            </p>
-            
-            <p style={{ margin: '12px 0 0 0' }}>
-              <strong>Bequest opportunity:</strong> 85.5% of those requesting bequest information came from actionable segments — a warm pipeline for legacy giving outreach.
-            </p>
-            
-            <p style={{ margin: '12px 0 0 0' }}>
-              <strong>Awareness-action gap:</strong> Fish farm awareness is relatively high (72.3%) yet ranked last for donation priority (4.7%) — awareness alone doesn't drive giving.
-            </p>
-          </div>
         </div>
 
       </div>
