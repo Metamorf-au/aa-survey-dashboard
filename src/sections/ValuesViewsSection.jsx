@@ -89,7 +89,7 @@ const q6OtherData = [
 const q7Data = [
   { label: 'Pig farrowing crates', fullLabel: "In factory farms, mother pigs are confined in restricted 'farrowing crates'", count: 4641, pct: 90.7 },
   { label: '\'Humane slaughter\' myth', fullLabel: "There is no such thing as 'humane slaughter'", count: 4425, pct: 86.4 },
-  { label: 'Bobby calf \'waste products\'', fullLabel: 'Bobby Calves considered \'waste product\'; slaughtered within the first week of life', count: 4399, pct: 85.9 },
+  { label: 'Bobby \'waste products\'', fullLabel: 'Bobby Calves considered \'waste product\'; slaughtered within the first week of life', count: 4399, pct: 85.9 },
   { label: 'Meat chicken suffering', fullLabel: "Chickens raised for 'meat' in all commercial systems endure short painful lives", count: 4251, pct: 83.0 },
   { label: 'Male chicks killed', fullLabel: 'Male chicks born into commercial egg production systems are considered worthless', count: 3883, pct: 75.9 },
   { label: 'Farming drives extinction', fullLabel: 'The biggest driver of biodiversity loss and species extinction is farming animals', count: 3878, pct: 75.8 },
