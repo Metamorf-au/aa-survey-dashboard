@@ -88,8 +88,8 @@ const q6OtherData = [
 // Q7 Data - Awareness of cruelty practices (sorted by awareness descending)
 const q7Data = [
   { label: 'Pig farrowing crates', fullLabel: "In factory farms, mother pigs are confined in restricted 'farrowing crates'", count: 4641, pct: 90.7 },
-  { label: 'No humane slaughter', fullLabel: "There is no such thing as 'humane slaughter'", count: 4425, pct: 86.4 },
-  { label: 'Dairy cow pregnancy cycle', fullLabel: 'Dairy cows are kept almost continuously pregnant and give birth each year', count: 4399, pct: 85.9 },
+  { label: '\'Humane slaughter\' myth', fullLabel: "There is no such thing as 'Humane slaughter'", count: 4425, pct: 86.4 },
+  { label: 'Bobby Calves \'waste products\'', fullLabel: 'Bobby Calves are considered \'waste product\' and slaughtered within the first week of life', count: 4399, pct: 85.9 },
   { label: 'Meat chicken suffering', fullLabel: "Chickens raised for 'meat' in all commercial systems endure short painful lives", count: 4251, pct: 83.0 },
   { label: 'Male chicks killed', fullLabel: 'Male chicks born into commercial egg production systems are considered worthless', count: 3883, pct: 75.9 },
   { label: 'Farming drives extinction', fullLabel: 'The biggest driver of biodiversity loss and species extinction is farming animals', count: 3878, pct: 75.8 },
@@ -591,7 +591,7 @@ const ValuesViewsSection = () => {
         }}>
           <SectionHeader
             question="Q7"
-            title="Are you aware of the following cruelty practices and issues within the Australian farming industry?"
+            title="Are you aware of these routine industrialised farming practices that cause widespread suffering to land and aquatic animals in Australia?"
             subtitle="Respondents answered Yes or No for each issue"
             respondents={4965}
           />
@@ -603,7 +603,7 @@ const ValuesViewsSection = () => {
             flexWrap: 'wrap',
           }}>
             <StatCard value="90.7%" label="Pig farrowing crates" colorType="primary" />
-            <StatCard value="86.4%" label="No humane slaughter" colorType="secondary" />
+            <StatCard value="86.4%" label="'Humane slaughter' myth" colorType="secondary" />
             <StatCard value="47.4%" label="Hen lifespan (lowest)" colorType="warning" />
           </div>
 
@@ -625,7 +625,7 @@ const ValuesViewsSection = () => {
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Top awareness cluster: Pig farrowing crates (90.7%), humane slaughter myth (86.4%), and dairy cow pregnancy (85.9%) are the most well-known issues among supporters.
+              Top awareness cluster: Pig farrowing crates (90.7%), 'Humane slaughter' myth (86.4%) and Bobby Calves 'waste product' (85.9%) are the most well-known issues among supporters.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
