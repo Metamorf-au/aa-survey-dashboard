@@ -351,7 +351,7 @@ const YourSupportSection = () => {
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Untapped potential in digital/community — membership portal (7.3%), YouTube (7.4%), and fundraising (0.4%) show low engagement, suggesting opportunities to grow these channels or reconsider their prominence.
+              Untapped potential in digital/community — membership portal (7.3%), YouTube (7.4%), and 'peer-to-peer' fundraising (0.4%) show low engagement, suggesting opportunities to grow these channels or reconsider their prominence.
             </p>
           </div>
         </div>
