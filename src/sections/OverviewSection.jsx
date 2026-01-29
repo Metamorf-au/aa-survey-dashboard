@@ -24,6 +24,7 @@ const StatCard = ({ value, label, colorType }) => {
     primary: '#2D5A47',
     secondary: '#1E7B8C',
     accent: '#E8724A',
+    background: '#f8f3e8',
   };
   const bgColor = colorMap[colorType] || colorMap.primary;
   
@@ -224,8 +225,8 @@ const OverviewSection = () => {
             <StatCard value="74.4%" label="Aged 56 or older" colorType="primary" />
             <StatCard value="65.9%" label="Inspired by Results" colorType="secondary" />
             <StatCard value="41%" label="Vegan/vegetarian" colorType="accent" />
-            <StatCard value="77.1%" label="Email subscribers" colorType="primary" />
-            <StatCard value="39.4%" label="Monthly donors" colorType="secondary" />
+            <StatCard value="77.1%" label="Email Subscribers" colorType="primary" />
+            <StatCard value="39.4%" label="Monthly Donors" colorType="secondary" />
             <StatCard value="94.6%" label="Trust Stewardship" colorType="accent" />
             <StatCard value="74NPS" label="World-class Loyalty" colorType="background" />
           </div>
