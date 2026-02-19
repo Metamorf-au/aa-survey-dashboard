@@ -295,9 +295,9 @@ const OverviewSection = () => {
               padding: '20px',
               borderLeft: '4px solid #8B5CF6',
             }}>
-              <div style={{ fontSize: '28px', fontWeight: 700, color: '#8B5CF6' }}>7.3%</div>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>Digital channel growth</div>
-              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Increase online content</div>
+              <div style={{ fontSize: '28px', fontWeight: 700, color: '#8B5CF6' }}>27</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: COLORS.text, marginTop: '4px' }}>DGR status</div>
+              <div style={{ fontSize: '13px', color: COLORS.textMuted, marginTop: '2px' }}>Major giving potential</div>
             </div>
           </div>
         </div>

@@ -66,10 +66,10 @@ const q11Data = [
 // Q12 Data - Gift in Will consideration (sorted by count)
 const q12Data = [
   { label: 'Not at this time', fullLabel: 'Not at this time', count: 1909, pct: 37.9 },
-  { label: 'Would consider including', fullLabel: 'Consider including Animals Australia in my will', count: 934, pct: 18.5 },
-  { label: 'Already included', fullLabel: 'Yes, Already included Animals Australia in my will', count: 901, pct: 17.9 },
-  { label: "Don't have a will yet", fullLabel: "Don't have a will yet", count: 867, pct: 17.2 },
-  { label: 'Intend to include', fullLabel: 'Intend to include Animals Australia when I next revise my will', count: 546, pct: 10.8 },
+  { label: 'Would consider including', fullLabel: 'Consider including Animals Australia in my Will', count: 934, pct: 18.5 },
+  { label: 'Already included', fullLabel: 'Yes, Already included Animals Australia in my Will', count: 901, pct: 17.9 },
+  { label: "Don't have a Will yet", fullLabel: "Don't have a Will yet", count: 867, pct: 17.2 },
+  { label: 'Intend to include', fullLabel: 'Intend to include Animals Australia when I next revise my Will', count: 546, pct: 10.8 },
 ];
 
 // Q13 Data - Interest in bequest info (sorted by count)
@@ -320,7 +320,7 @@ const YourSupportSection = () => {
                   background: COLORS.cardBg,
                   borderRadius: '8px',
                 }}>
-                  <strong style={{ color: COLORS.primary }}>Insight:</strong> 63% of responses (148) duplicated existing options or were general statements, suggesting the survey options were comprehensive but perhaps unclear. Key unique themes: many supporters actively avoid distressing content due to emotional impact (21), engage in personal word-of-mouth advocacy (18), and have included AA in their wills (16). Bequest/legacy giving represents a notable gap — it's clearly important to supporters but isn't captured as a formal engagement option.
+                  <strong style={{ color: COLORS.primary }}>Insight:</strong> 63% of responses (148) duplicated existing options or were general statements, suggesting the survey options were comprehensive but perhaps unclear. Key unique themes: many supporters actively avoid distressing content due to emotional impact (21), engage in personal word-of-mouth advocacy (18), and have included AA in their Wills (16). Bequest/legacy giving represents a notable gap — it's clearly important to supporters but isn't captured as a formal engagement option.
                 </p>
               </div>
             )}
@@ -343,7 +343,7 @@ const YourSupportSection = () => {
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Active advocacy is strong — 68.1% take actions and sign petitions, demonstrating that AA supporters are not passive donors but engaged advocates willing to lobby decision-makers. Combined with the 50.6% who donate to appeals, this shows a highly committed supporter base.
+              Active advocacy is strong — 68.1% take actions and sign petitions, demonstrating that AA supporters are not passive donors but engaged advocates Willing to lobby decision-makers. Combined with the 50.6% who donate to appeals, this shows a highly committed supporter base.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
@@ -459,15 +459,15 @@ const YourSupportSection = () => {
             <strong style={{ color: COLORS.primary }}>Key insights:</strong>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Strong legacy giving pipeline — 47.2% of respondents show some level of bequest interest: 17.9% have already included AA in their will, 10.8% intend to, and 18.5% would consider it. This represents significant future fundraising potential.
+              Strong legacy giving pipeline — 47.2% of respondents show some level of bequest interest: 17.9% have already included AA in their Will, 10.8% intend to, and 18.5% would consider it. This represents significant future fundraising potential.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Existing bequest supporters — 901 supporters have already included AA in their will. Combined with the 546 who intend to, that's 28.7% with committed or near-committed legacy intentions.
+              Existing bequest supporters — 901 supporters have already included AA in their Will. Combined with the 546 who intend to, that's 28.7% with committed or near-committed legacy intentions.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Will creation opportunity — 17.2% don't have a will yet. Given the older demographic (74.4% aged 56+), this represents both an opportunity for AA to provide estate planning resources and a pool of potential future bequest supporters.
+              Will creation opportunity — 17.2% don't have a Will yet. Given the older demographic (74.4% aged 56+), this represents both an opportunity for AA to provide estate planning resources and a pool of potential future bequest supporters.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
@@ -500,7 +500,7 @@ const YourSupportSection = () => {
           }}>
             <StatCard value="38.3%" label="Would consider (Q12)" colorType="primary" />
             <StatCard value="27.1%" label="Intend to include (Q12)" colorType="secondary" />
-            <StatCard value="20.1%" label="No will yet (Q12)" colorType="accent" />
+            <StatCard value="20.1%" label="No Will yet (Q12)" colorType="accent" />
           </div>
 
           {/* Bar Chart */}
@@ -527,11 +527,11 @@ const YourSupportSection = () => {
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              Q12 correlation reveals actionable segments — of the 673 interested: 38.3% (258) would consider including in their will, 27.1% (182) already intend to include, and 20.1% (135) don't have a will yet but want guidance.
+              Q12 correlation reveals actionable segments — of the 673 interested: 38.3% (258) would consider including in their Will, 27.1% (182) already intend to include, and 20.1% (135) don't have a Will yet but want guidance.
             </p>
             
             <p style={{ margin: '12px 0 0 0' }}>
-              "No will yet" represents a guided opportunity — these 135 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
+              "No Will yet" represents a guided opportunity — these 135 supporters could benefit from estate planning resources, potentially converting them to bequest supporters while providing genuine value.
             </p>
           </div>
         </div>
